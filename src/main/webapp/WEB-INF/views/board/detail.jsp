@@ -21,7 +21,7 @@
 <!-- 상품상세정보란 시작 -->
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Board information</h4>
-        <form action="/board/modify" method="post">
+        <form action="/board/remove" method="post">
         <input type="hidden" name="bno" value="${bvo.bno }">
           <div class="row g-3">
 
@@ -69,7 +69,7 @@
             </div>
 
     	   	<a href="/board/modify?bno=${bvo.bno }" type="button" id="modBtn" class="btn btn-outline-warning">MOD</a>
-    		<button type="button" id="delBtn" class="btn btn-outline-danger">DEL</button>
+    		<button type="submit" id="delBtn" class="btn btn-outline-danger">DEL</button>
         </div>
         </form>
       </div>

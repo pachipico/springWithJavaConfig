@@ -21,34 +21,34 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int register(BoardVO bvo) {
 		
-		return bdao.insert(bvo);
+		return bdao.insertBoard(bvo);
 	}
 
 	@Override
 	public List<BoardVO> getList() {
 
-		return bdao.selectList();
+		return bdao.selectListBoard();
 	}
 
 	@Override
 	public BoardVO getDetail(Long bno) {
-//		BoardVO bvo = bdao.selectOne(bno);
-//		if(bvo != null) {
-//			bdao.updateReadCnt(bno);
-//		}
-		return bdao.selectOne(bno);
+		BoardVO bvo = bdao.selectOneBoard(bno);
+		if(bvo != null) {
+			bdao.updateReadCntBoard(bno);
+		}
+		return bdao.selectOneBoard(bno);
 	}
 
 	@Override
 	public int modify(BoardVO bvo) {
 		
-		return bdao.update(bvo);
+		return bdao.updateBoard(bvo);
 	}
 
 	@Override
 	public int remove(Long bno) {
 
-		return bdao.delete(bno);
+		return bdao.deleteBoard(bno);
 	}
 
 }

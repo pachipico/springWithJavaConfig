@@ -27,17 +27,17 @@ public class BoardTest {
 		bvo.setTitle("testTitle1");
 		bvo.setContent("test content1");
 		bvo.setWriter("123@123.com");
-		log.debug("insert {}", bdao.insert(bvo) > 0 ? "success" : "fail");
+		log.debug("insert {}", bdao.insertBoard(bvo) > 0 ? "success" : "fail");
 	}
 	
 	@Test
 	public void selectOne() throws Exception {
-		bdao.selectOne(1L);
+		bdao.selectOneBoard(1L);
 	}
 	
 	@Test
 	public void selectList() throws Exception {
-		bdao.selectList();
+		bdao.selectListBoard();
 	}
 	
 	@Test
@@ -46,18 +46,18 @@ public class BoardTest {
 		bvo.setBno(1);
 		bvo.setTitle("modifiedTitle");
 		bvo.setContent("this content has been modified");
-		bdao.update(bvo);
-		bdao.selectOne(1L);
+		bdao.updateBoard(bvo);
+		bdao.selectOneBoard(1L);
 	}
 	
 	@Test
 	public void updateReadCnt() throws Exception {
-		bdao.updateReadCnt(1L);
-		bdao.selectOne(1L);
+		bdao.updateReadCntBoard(3L);
+		bdao.selectOneBoard(3L);
 	}
 	
 	@Test
 	public void delete() throws Exception {
-		bdao.delete(1L);
+		bdao.deleteBoard(1L);
 	}
 }

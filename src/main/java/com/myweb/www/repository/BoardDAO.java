@@ -5,10 +5,10 @@ import java.util.List;
 import com.myweb.www.domain.BoardVO;
 
 public interface BoardDAO {
-	int insert(BoardVO bvo);
-	BoardVO selectOne(Long bno);
-	List<BoardVO> selectList();
-	int update(BoardVO bvo);
-	int updateReadCnt(Long bno);
-	int delete(Long bno);
+	int insertBoard(BoardVO bvo);
+	BoardVO selectOneBoard(Long bno);
+	List<BoardVO> selectListBoard();
+	int updateBoard(BoardVO bvo);
+	int updateReadCntBoard(Long bno);
+	int deleteBoard(Long bno);
 }

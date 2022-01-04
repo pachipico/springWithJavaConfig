@@ -4,12 +4,6 @@
 <jsp:include page="../common/header.jsp" />
 <jsp:include page="../common/nav.jsp" />
 
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../common/header.jsp" />
-<jsp:include page="../common/nav.jsp" />
-
 <div class="container">
   <main>
     <div class="py-5 text-center">
@@ -24,9 +18,9 @@
         
       </div>
       
-<!-- 상품상세정보란 시작 -->
+<!-- 게시글 수정란 시작 -->
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Board information</h4>
+        <h4 class="mb-3">Board information modify</h4>
         <form action="/board/modify" method="post">
         <input type="hidden" name="bno" value="${bvo.bno }">
           <div class="row g-3">
@@ -42,15 +36,15 @@
             
             <div class="col-12">
               <label for="regAt" class="form-label">Reg At</label>
-              <input type="text" class="form-control" id="regAt" value="${bvo.regAt }" >              
+              <input type="text" class="form-control" id="regAt" value="${bvo.regAt }" readonly >              
             </div>
             <div class="col-12">
               <label for="modAt" class="form-label">Mod At</label>
-              <input type="text" class="form-control" id="modAt" value="${bvo.modAt }" >              
+              <input type="text" class="form-control" id="modAt" value="${bvo.modAt }" readonly >              
             </div>
             <div class="col-12">
               <label for="readCount" class="form-label">Read Count</label>
-              <input type="text" class="form-control" id="readCount" value="${bvo.readCount }" >              
+              <input type="text" class="form-control" id="readCount" value="${bvo.readCount }"  readonly>              
             </div>
            
             
@@ -62,20 +56,13 @@
 
             <div class="col-12">
               <label for="content" class="form-label">Content</label>
-              <textarea class="form-control" name="content" readOnly
+              <textarea class="form-control" name="content" 
                id="content" placeholder="Content">${bvo.content }</textarea>              
             </div>
 
           
 
-            <div class="col-md-3">
-              <label for="price" class="form-label">Price</label>
-              <input type="text" class="form-control" name="price"
-               id="price" placeholder="" value="${pvo.price }" required >
-            </div>
-
-    	   	<a href="/board/modify?bno=${bvo.bno }" type="button" id="modBtn" class="btn btn-outline-warning">MOD</a>
-    		<button type="button" id="delBtn" class="btn btn-outline-danger">DEL</button>
+    		<button type="submit" id="modBtn" class="btn btn-outline-primary">edit</button>
         </div>
         </form>
       </div>
@@ -123,48 +110,13 @@
 		    </div>
 		  </div>
 		</div>
-    <%--   <c:if test="${not empty ses.email }">
-      <div id="cmtForm">
-      		<input type="hidden" name="pno" value="${pvo.pno }">
-      		<input type="hidden" name="writer" value="${ses.email }">
-      		<textarea class="form-control" id="cmtContent" name="content"></textarea>
-      		<button type="button" id="cmtAddBtn" class="btn btn-sm btn-primary my-2">add comment</button>
-      </div>
-      </c:if>
-            	<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Nickname</th>
-      <th scope="col">reg at</th>
-      <th scope="col">content</th>
-      <th scope="col">buttons</th>
-    </tr>
-  </thead>
-  <tbody id="cmtContainer">
-
-  </tbody>
-</table> --%>
+ 
       
     </div>
   </main>
 </div>
-<form action="/product/remove" method="post" id="delForm">
-	<input type="hidden" name="pno" value="${pvo.pno }">
-</form>
 
-<script type="text/javascript">
-const pnoVal = document.querySelector("input[name=bno]").value;
-const ses = '<c:out value="${ses.email}"/>'
-</script>
-<script src="/resources/js/board.detail.js"></script>
-<!-- <script src="/resources/js/product.comment.js"></script> -->
-<script>
-let isMod = '<c:out value="${isMod}"/>';
-if (parseInt(isMod)) {
-	alert('상품 수정 성공~');
-}
-getCommentList(pnoVal);
-</script>
+
 <jsp:include page="../common/footer.jsp" />
 
 <jsp:include page="../common/footer.jsp" />
