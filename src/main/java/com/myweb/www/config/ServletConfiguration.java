@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.myweb.www.ctrl"})
+@ComponentScan(basePackages = {"com.myweb.www.ctrl", "com.myweb.www.domain", "com.myweb.www.repository"})
 public class ServletConfiguration implements WebMvcConfigurer {
 
 	@Override

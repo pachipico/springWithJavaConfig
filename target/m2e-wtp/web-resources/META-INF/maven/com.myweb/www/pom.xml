@@ -9,7 +9,7 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<failOnMissingWebXml>false</failOnMissingWebXml>
+		
 		<java-version>11</java-version>
 		<org.springframework-version>5.3.10</org.springframework-version>
 		<org.aspectj-version>1.9.5</org.aspectj-version>
@@ -240,7 +240,7 @@
 			</plugin>
 			<!-- web.xml 삭제, java config 설정 추가 -->
 			<plugin>
-				<groupId>org.apache.maven.plugin</groupId>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>3.2.0</version>
 				<configuration>
