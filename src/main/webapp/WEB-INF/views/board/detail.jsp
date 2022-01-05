@@ -64,10 +64,10 @@
 
             
     		<div class="col-4">
-    		<a href="/board/list?pageNo=${pgvo.pageNo }&qty=${pgvo.qty}" class="btn btn-outline-primary">LIST</a>
+    		<a href="/board/list?pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" class="btn btn-outline-primary">LIST</a>
     		</div>
 			<div class="col-4">
-    	   	<a href="/board/modify?bno=${bvo.bno }&pageNo=${pgvo.pageNo }&qty=${pgvo.qty}" type="button" id="modBtn" class="btn btn-outline-warning">MOD</a>
+    	   	<a href="/board/modify?bno=${bvo.bno }&pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" type="button" id="modBtn" class="btn btn-outline-warning">MOD</a>
 			</div>
 			<div class="col-4">
     		<button type="submit" id="delBtn" class="btn btn-outline-danger">DEL</button>
@@ -126,6 +126,9 @@
 </div>
 <form action="/product/remove" method="post" id="delForm">
 	<input type="hidden" name="pno" value="${pvo.pno }">
+	<input type="text" name="pageNo" value="${pgvo.pageNo }">
+        <input type="text" name="type" value="${pgvo.type }">
+        <input type="text" name="keyword" value="${pgvo.keyword }">
 </form>
 
 <script type="text/javascript">

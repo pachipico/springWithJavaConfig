@@ -24,6 +24,9 @@
         <form action="/board/modify" method="post">
         <input type="hidden" name="bno" value="${bvo.bno }">
         <input type="text" name="pageNo" value="${pgvo.pageNo }">
+        <input type="text" name="type" value="${pgvo.type }">
+        <input type="text" name="keyword" value="${pgvo.keyword }">
+        
         <input type="text" name="qty" value="${pgvo.qty }">
           <div class="row g-3">
 

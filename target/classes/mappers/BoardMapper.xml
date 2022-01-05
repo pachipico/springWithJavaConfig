@@ -3,49 +3,86 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.myweb.www.repository.BoardDAO">
-	
+	<sql id="search">
+		<if test="type != null">
+			<trim prefix="and (" suffix=")" prefixOverrides="OR">
+				<foreach collection="typeToArr" item="type">
+					<trim prefix="OR">
+						<choose>
+							<when test="type == 't'.toString()">
+								<!-- title like %${keyword}% -->
+								title like concat('%', #{keyword}, '%')
+							</when>
+							<when test="type == 'c'.toString()">
+								<!-- content like %${keyword}% -->
+								content like concat('%', #{keyword}, '%')
+							</when>
+							<when test="type == 'w'.toString()">
+								<!-- writer like %${keyword}% -->
+								writer like concat('%', #{keyword}, '%')
+							</when>
+
+						</choose>
+					</trim>
+				</foreach>
+			</trim>
+		</if>
+	</sql>
+
 	<insert id="insertBoard" parameterType="bvo">
-		insert into board(title, content, writer)
+		insert into board(title,
+		content, writer)
 		values(#{title}, #{content}, #{writer})
 	</insert>
-	
-	<select id="selectOneBoard" parameterType="long" resultType="bvo">
-		select bno, title, content, writer, reg_at, mod_at, read_count
+
+	<select id="selectOneBoard" parameterType="long"
+		resultType="bvo">
+		select bno, title, content, writer, reg_at, mod_at,
+		read_count
 		from board where bno = #{bno}
 	</select>
-	
+
 	<select id="selectListBoard" resultType="bvo">
 		select bno, title, writer, reg_at, mod_at, read_count
-		from board order by reg_at desc 
+		from board order
+		by reg_at desc
 		<!-- where ${field} like #{query} -->
 	</select>
-	
-	<select id="selectListBoardPaging" parameterType="pgvo" resultType="bvo">
+
+	<select id="selectListBoardPaging" parameterType="pgvo"
+		resultType="bvo">
 		select a.bno, title, writer, mod_at, read_count from
-		(select bno from board where bno > 0 order by bno desc 
+		(select bno from
+		board where bno > 0
+		<include refid="search" />
+		order by bno desc
 		limit #{pageStart}, #{qty}) a left join board b on a.bno = b.bno
+		
 	</select>
-	
-	<select id="selectOneTotalCount" parameterType="pgvo" resultType="int">
+
+	<select id="selectOneTotalCount" parameterType="pgvo"
+		resultType="int">
 		select count(bno) count from board where bno > 0
+		<include refid="search"></include>
 	</select>
-	
+
 	<update id="updateBoard" parameterType="bvo">
-		update board set 
+		update board set
 		title = #{title},
 		content = #{content},
-		mod_at = now() 
+		mod_at = now()
 		where bno = #{bno}
 	</update>
-	
-	 <update id="updateReadCntBoard" parameterType="long">
+
+	<update id="updateReadCntBoard" parameterType="long">
 		update board set
 		read_count = read_count + 1
 		where bno = #{bno}
-	</update> 
+	</update>
 
 	<delete id="deleteBoard" parameterType="long">
-		delete from board where bno = #{bno}
+		delete from board where
+		bno = #{bno}
 	</delete>
-	
+
 </mapper>

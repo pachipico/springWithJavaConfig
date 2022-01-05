@@ -33,7 +33,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardVO> getList(PagingVO pagination) {
-
+		log.debug("service pagination : {}",pagination.toString());
 		return bdao.selectListBoardPaging(pagination);
 	}
 

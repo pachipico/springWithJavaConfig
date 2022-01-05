@@ -64,8 +64,9 @@ public class BoardController {
 	}
 	
 	@PostMapping("/remove")
-	public String remove(@RequestParam Long bno, RedirectAttributes reAttr) {
+	public String remove(@RequestParam Long bno, RedirectAttributes reAttr,@ModelAttribute("pgvo") PagingVO pgvo ) {
 		reAttr.addFlashAttribute("isDel", bsv.remove(bno));
+		reAttr.addFlashAttribute("pgvo",pgvo);
 		return "redirect:/board/list";
 	}
 }
