@@ -17,29 +17,31 @@ import lombok.extern.slf4j.Slf4j;
 @ContextConfiguration(classes = RootConfig.class)
 @Slf4j
 public class BoardTest {
-	
+
 	@Inject
 	private BoardDAO bdao;
-	
+
 	@Test
 	public void insert() {
-		BoardVO bvo = new BoardVO();
-		bvo.setTitle("testTitle1");
-		bvo.setContent("test content1");
-		bvo.setWriter("123@123.com");
-		log.debug("insert {}", bdao.insertBoard(bvo) > 0 ? "success" : "fail");
+		for (int i = 0; i < 512000; i++) {
+			BoardVO bvo = new BoardVO();
+			bvo.setTitle("testTitle" + i);
+			bvo.setContent("test content" + i);
+			bvo.setWriter("test" + ((int)Math.random() * 100) + 1 + "@test.com");
+			bdao.insertBoard(bvo);
+		}
 	}
-	
+
 	@Test
 	public void selectOne() throws Exception {
 		bdao.selectOneBoard(1L);
 	}
-	
+
 	@Test
 	public void selectList() throws Exception {
 		bdao.selectListBoard();
 	}
-	
+
 	@Test
 	public void update() throws Exception {
 		BoardVO bvo = new BoardVO();
@@ -49,13 +51,13 @@ public class BoardTest {
 		bdao.updateBoard(bvo);
 		bdao.selectOneBoard(1L);
 	}
-	
+
 	@Test
 	public void updateReadCnt() throws Exception {
 		bdao.updateReadCntBoard(3L);
 		bdao.selectOneBoard(3L);
 	}
-	
+
 	@Test
 	public void delete() throws Exception {
 		bdao.deleteBoard(1L);

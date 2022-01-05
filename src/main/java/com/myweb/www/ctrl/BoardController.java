@@ -1,20 +1,19 @@
 package com.myweb.www.ctrl;
 
-import java.util.Map;
-
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.www.domain.BoardVO;
+import com.myweb.www.domain.PagingVO;
+import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -37,21 +36,30 @@ public class BoardController {
 		return "redirect:/board/list";
 	}
 	
+//	@GetMapping("/list")
+//	public void list(Model model) {
+//		model.addAttribute("list", bsv.getList());
+//		
+//	}
+	//paging list
 	@GetMapping("/list")
-	public void list(Model model) {
-		model.addAttribute("list", bsv.getList());
+	public void list(Model model, PagingVO pagingVO) {
+		model.addAttribute("list", bsv.getList(pagingVO));
+		int totalCount = bsv.getTotalCount(pagingVO);
+		model.addAttribute("pgn", new PagingHandler(pagingVO, totalCount));
 		
 	}
 	
 	@GetMapping({"/detail", "/modify"})
-	public void detail(@RequestParam("bno") Long bno, Model model) {
+	public void detail(@RequestParam("bno") Long bno,@ModelAttribute("pgvo") PagingVO pgvo, Model model) {
 		model.addAttribute("bvo", bsv.getDetail(bno));
-		
+//		model.addAttribute("pgvo", pgvo);
 	}
 	
 	@PostMapping("/modify")
-	public String modify(BoardVO bvo, RedirectAttributes reAttr) {
+	public String modify(BoardVO bvo, RedirectAttributes reAttr,@ModelAttribute("pgvo") PagingVO pgvo) {
 		reAttr.addFlashAttribute("isUp", bsv.modify(bvo));
+		reAttr.addFlashAttribute("pgvo",pgvo);
 		return "redirect:/board/detail?bno=" + bvo.getBno();
 	}
 	

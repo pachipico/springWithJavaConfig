@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import com.myweb.www.domain.BoardVO;
+import com.myweb.www.domain.PagingVO;
 import com.myweb.www.repository.BoardDAO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +32,24 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	public List<BoardVO> getList(PagingVO pagination) {
+
+		return bdao.selectListBoardPaging(pagination);
+	}
+
+	@Override
 	public BoardVO getDetail(Long bno) {
 		BoardVO bvo = bdao.selectOneBoard(bno);
 		if(bvo != null) {
 			bdao.updateReadCntBoard(bno);
 		}
 		return bdao.selectOneBoard(bno);
+	}
+
+	@Override
+	public int getTotalCount(PagingVO pagingVO) {
+
+		return bdao.selectOneTotalCount(pagingVO);
 	}
 
 	@Override
@@ -50,5 +63,6 @@ public class BoardServiceImpl implements BoardService {
 
 		return bdao.deleteBoard(bno);
 	}
+
 
 }

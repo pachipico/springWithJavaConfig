@@ -62,15 +62,17 @@
 
           
 
-            <div class="col-md-3">
-              <label for="price" class="form-label">Price</label>
-              <input type="text" class="form-control" name="price"
-               id="price" placeholder="" value="${pvo.price }" required readOnly>
-            </div>
-
-    	   	<a href="/board/modify?bno=${bvo.bno }" type="button" id="modBtn" class="btn btn-outline-warning">MOD</a>
+            
+    		<div class="col-4">
+    		<a href="/board/list?pageNo=${pgvo.pageNo }&qty=${pgvo.qty}" class="btn btn-outline-primary">LIST</a>
+    		</div>
+			<div class="col-4">
+    	   	<a href="/board/modify?bno=${bvo.bno }&pageNo=${pgvo.pageNo }&qty=${pgvo.qty}" type="button" id="modBtn" class="btn btn-outline-warning">MOD</a>
+			</div>
+			<div class="col-4">
     		<button type="submit" id="delBtn" class="btn btn-outline-danger">DEL</button>
-        </div>
+			</div>
+        </div>	
         </form>
       </div>
       <div class="input-group">
@@ -117,27 +119,7 @@
 		    </div>
 		  </div>
 		</div>
-    <%--   <c:if test="${not empty ses.email }">
-      <div id="cmtForm">
-      		<input type="hidden" name="pno" value="${pvo.pno }">
-      		<input type="hidden" name="writer" value="${ses.email }">
-      		<textarea class="form-control" id="cmtContent" name="content"></textarea>
-      		<button type="button" id="cmtAddBtn" class="btn btn-sm btn-primary my-2">add comment</button>
-      </div>
-      </c:if>
-            	<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Nickname</th>
-      <th scope="col">reg at</th>
-      <th scope="col">content</th>
-      <th scope="col">buttons</th>
-    </tr>
-  </thead>
-  <tbody id="cmtContainer">
 
-  </tbody>
-</table> --%>
       
     </div>
   </main>

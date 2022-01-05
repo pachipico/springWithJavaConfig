@@ -9,5 +9,6 @@
 	<typeAliases>
 		<typeAlias type="com.myweb.www.domain.BoardVO" alias="bvo"/> 
 		<typeAlias type="com.myweb.www.domain.CommentVO" alias="cvo"/> 
+		<typeAlias type="com.myweb.www.domain.PagingVO" alias="pgvo"/> 
 	</typeAliases>
 </configuration>

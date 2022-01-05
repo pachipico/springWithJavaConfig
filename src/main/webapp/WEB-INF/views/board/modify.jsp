@@ -23,6 +23,8 @@
         <h4 class="mb-3">Board information modify</h4>
         <form action="/board/modify" method="post">
         <input type="hidden" name="bno" value="${bvo.bno }">
+        <input type="text" name="pageNo" value="${pgvo.pageNo }">
+        <input type="text" name="qty" value="${pgvo.qty }">
           <div class="row g-3">
 
             <div class="col-12">

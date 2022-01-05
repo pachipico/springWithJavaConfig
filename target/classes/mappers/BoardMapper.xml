@@ -20,6 +20,16 @@
 		<!-- where ${field} like #{query} -->
 	</select>
 	
+	<select id="selectListBoardPaging" parameterType="pgvo" resultType="bvo">
+		select a.bno, title, writer, mod_at, read_count from
+		(select bno from board where bno > 0 order by bno desc 
+		limit #{pageStart}, #{qty}) a left join board b on a.bno = b.bno
+	</select>
+	
+	<select id="selectOneTotalCount" parameterType="pgvo" resultType="int">
+		select count(bno) count from board where bno > 0
+	</select>
+	
 	<update id="updateBoard" parameterType="bvo">
 		update board set 
 		title = #{title},
