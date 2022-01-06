@@ -70,22 +70,22 @@
           	<div class="col-12">
               <label for="title" class="form-label">Title</label>
               <input type="text" class="form-control" name="title"
-               id="title" placeholder="title">              
+               id="title" placeholder="Title">              
             </div>
 
             <div class="col-12">
-              <label for="writer" class="form-label">Writer</label>
+              <label for="email" class="form-label">Writer</label>
               <div class="input-group has-validation">
                 <span class="input-group-text">@</span>
                 <input type="email" class="form-control" name="writer"
-                id="writer"  placeholder="writer">              
+                id="writer" placeholder="Writer">              
               </div>
             </div>
 
             <div class="col-12">
-              <label for="content" class="form-label">Content</label>
+              <label for="cont" class="form-label">Content</label>
               <textarea class="form-control" name="content"
-               id="content" placeholder="Content"></textarea>              
+               id="desc" placeholder="Content"></textarea>              
             </div>
 
           <button class="w-100 btn btn-primary btn-lg my-5" type="submit">Continue to Register</button>

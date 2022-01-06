@@ -8,7 +8,7 @@
   <main>
     <div class="py-5 text-center">
       <img class="d-block mx-auto mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
-      <h2>Product Detail</h2>
+      <h2>Product Register</h2>
       <p class="lead">Below is an example form built entirely with Bootstrap’s form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
     </div>
 
@@ -61,55 +61,39 @@
         </form>
       </div>
       
-<!-- 게시글 편집란 시작 -->
+<!-- 상품등록란 시작 -->
       <div class="col-md-7 col-lg-8">
-        <h4 class="mb-3">Board information Modify</h4>
-        <form action="/board/modify" method="post">
-        <input type="hidden" name="bno" value="${bvo.bno }">
-        <input type="hidden" name="pageNo" value="${pgvo.pageNo }">
-        <input type="hidden" name="qty" value="${pgvo.qty }">
-        <input type="hidden" name="type" value="${pgvo.type }">
-    	<input type="hidden" name="keyword" value="${pgvo.keyword }">
+        <h4 class="mb-3">Input product information</h4>
+        <form action="/board/register" method="post">
           <div class="row g-3">
+          
+          	<div class="col-12">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" name="title"
+               id="title" placeholder="title">              
+            </div>
 
             <div class="col-12">
-              <label for="email" class="form-label">Writer</label>
+              <label for="writer" class="form-label">Writer</label>
               <div class="input-group has-validation">
                 <span class="input-group-text">@</span>
                 <input type="email" class="form-control" name="writer"
-                id="writer" value="${bvo.writer }" readonly>              
+                id="writer"  placeholder="writer">              
               </div>
             </div>
-            
-            <div class="col-12">
-              <label for="regAt" class="form-label">Reg At</label>
-              <input type="text" class="form-control" value="${bvo.regAt }" readOnly>              
-            </div>
-            <div class="col-12">
-              <label for="modAt" class="form-label">Mod At</label>
-              <input type="text" class="form-control" value="${bvo.modAt }" readOnly>              
-            </div>
-            <div class="col-12">
-              <label for="readCount" class="form-label">Read Count</label>
-              <input type="text" class="form-control" value="${bvo.readCount }" readOnly>              
-            </div>
-            <div class="col-12">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" name="title"
-               id="title" placeholder="Title" value="${bvo.title }" >              
-            </div>
 
             <div class="col-12">
-              <label for="cont" class="form-label">Content</label>
-              <textarea class="form-control" name="content" 
-               id="cont" placeholder="Content">${bvo.content }</textarea>              
+              <label for="content" class="form-label">Content</label>
+              <textarea class="form-control" name="content"
+               id="content" placeholder="Content"></textarea>              
             </div>
 
-    		<button type="submit" class="btn btn-outline-warning">Submit</button>
+          <button class="w-100 btn btn-primary btn-lg my-5" type="submit">Continue to Register</button>
         </div>
         </form>
       </div>
     </div>
   </main>
 </div>
+
 <jsp:include page="../common/footer.jsp" />

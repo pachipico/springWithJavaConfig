@@ -11,9 +11,9 @@
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
           <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="/board/list" class="nav-link px-2 text-white">Products</a></li>
+          <li><a href="/board/list" class="nav-link px-2 text-white">Board</a></li>
           
-          	<li><a href="/board/register" class="nav-link px-2 text-white">Register</a></li>
+          	<li><a href="/product/list" class="nav-link px-2 text-white">Product</a></li>
           
           <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>

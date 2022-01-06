@@ -8,34 +8,36 @@
 	<div class="col-sm-12 col-md-6">
 		<h2>Product List
 			<a href="/board/register" class="btn btn-outline-primary">REG</a>
-		</h2>
+		</h2>	
 	</div>
 	<div class="col-sm-12 col-md-6">
-		<form action="/board/list" method="get">
-			<div class="input-group mb-3">
-			<c:set value="${pgn.pgvo.type }" var="typed" />
-			  <select class="form-select" name="type">
-			  	  <option ${typed == null ? 'selected' : '' } >Choose...</option>
-			    <option value="t" ${typed == 't' ? 'selected' : '' } >Title</option>
-			    <option value="c" ${typed == 'c' ? 'selected' : '' }>Content</option>
-			    <option value="w" ${typed == 'w' ? 'selected'  : ''}>Writer</option>
-			    <option value="tc" ${typed == 'tc' ? 'selected' : '' }>Title or Content</option>
-			    <option value="tw" ${typed == 'tw' ? 'selected' : '' }>Title or Writer</option>
-			    <option value="cw" ${typed == 'cw' ? 'selected' : '' }>Content of Writer</option>
-			  </select>
-			  <input type="text" class="form-control" name="keyword" placeholder="search" value="${pgn.pgvo.keyword }">
-			  <input type="hidden" name="pageNo" value="${pgn.pgvo.pageNo }" >
-			  <input type="hidden" name="qty" value="${pgn.pgvo.qty }" >
-			  <button type="submit" class="btn btn-outline-success position-relative">search
-			  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-    			${pgn.totalCount }
-    			  <span class="visually-hidden">unread messages</span>
-				  </span>
-			  </button>
-			</div>
-		</form>
+	<form action="/board/list" method="get">
+		<div class="input-group mb-3">
+		<c:set value="${pgn.pgvo.type }" var="typed"/>
+  			<select class="form-select" name="type">
+    			<option ${typed == null ? 'selected':'' }>Choose...</option>
+    			<option value="t" ${typed eq 't' ? 'selected':'' }>Title</option>
+    			<option value="c" ${typed eq 'c' ? 'selected':'' }>Content</option>
+    			<option value="w" ${typed eq 'w' ? 'selected':'' }>Writer</option>
+    			<option value="tc" ${typed eq 'tc' ? 'selected':'' }>Title or Content</option>
+    			<option value="tw" ${typed eq 'tw' ? 'selected':'' }>Title or Writer</option>
+    			<option value="cw" ${typed eq 'cw' ? 'selected':'' }>Content or Writer</option>
+  			</select>
+  			<input class="form-control" type="text" name="keyword" placeholder="Search" value="${pgn.pgvo.keyword }">
+  			<input type="hidden" name="pageNo" value="1">
+  			<input type="hidden" name="qty" value="${pgn.pgvo.qty }">
+  			<button type="submit" class="btn btn-success position-relative">
+  			Search
+  			<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    		${pgn.totalCount }
+    		<span class="visually-hidden">unread messages</span></span>
+  			</button>
+		</div>
+	</form>
 	</div>
 </div>
+
+
 <table class="table table-hover">
   <thead>
     <tr>
@@ -58,33 +60,33 @@
     </c:forEach>    
   </tbody>
 </table>
- <ul class="pagination justify-content-center">
+<ul class="pagination justify-content-center">
+	<c:if test="${pgn.prev }">
     <li class="page-item">
-      <c:if test="${pgn.prev }">
-      	<a href="/board/list?pageNo=${pgn.startPage - 1 }&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}" class="page-link">Previous</a>
-      </c:if>
+      <a href="/board/list?pageNo=${pgn.startPage - 1 }&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}" class="page-link">Prev</a>
     </li>
-    <c:forEach begin="${pgn.startPage }" end="${pgn.endPage }"  var="i">
-    
-    <li class="page-item ${pgn.pgvo.pageNo == i ? 'active' : '' }"><a class="page-link" href="/board/list?pageNo=${i }&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">${i }</a></li>
-   </c:forEach>
+    </c:if>
+    <c:forEach begin="${pgn.startPage }" end="${pgn.endPage }" var="i">
+    <li class="page-item ${pgn.pgvo.pageNo == i ? 'active':''}"
+     aria-current="page">
+      <a class="page-link" href="/board/list?pageNo=${i }&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">${i }</a>
+    </li>
+    </c:forEach>
+    <c:if test="${pgn.next }">
     <li class="page-item">
-      <c:if test="${pgn.next }">
-	    <a class="page-link" href="/board/list?pageNo=${pgn.endPage + 1 }&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">Next</a>
-      </c:if>
+      <a class="page-link" href="/board/list?pageNo=${pgn.endPage + 1 }&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">Next</a>
     </li>
+    </c:if>
   </ul>
-  <a href="/board/list?pageNo=1&qty=${pgn.pgvo.qty }&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}" class="btn">처음으로</a>
-  <a class="btn">마지막으로</a>
 </div>
 <script>
-let isReg = '<c:out value="${isReg}"/>';
+let isUp = '<c:out value="${isUp}"/>';
 let isDel = '<c:out value="${isDel}"/>';
-if (parseInt(isReg)) {
-	alert('등록 성공~');
+if (parseInt(isUp)) {
+	alert('게시글 등록 성공~');
 }
 if (parseInt(isDel)) {
-	alert('삭제 성공~');
+	alert('게시글 삭제 성공~');
 }
 </script>
 <jsp:include page="../common/footer.jsp" />

@@ -1,38 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.myweb.www.CommentMapper">
-	
-	<insert id="reg" parameterType="cvo">
-		insert into b_comment
-		(bno, writer, content)
-		values(#{bno}, #{writer}, #{content})
-	</insert>
-	
-	<select id="list" parameterType="long" resultType="cvo">
-		select cno, bno, writer, content, mod_at
-		from b_comment
-		where bno = #{bno}
+<mapper namespace="com.myweb.www.repository.BCommentDAO">
+	<insert id="insertBComment" parameterType="bcvo">
+		insert into b_comment (bno, writer, content)
+		values (#{bno}, #{writer}, #{content})
+	</insert>	
+	<select id="selectListBComment" resultType="bcvo">
+		select cno, writer, content, mod_at
+		from b_comment where bno = #{bno}
 	</select>
-	
-	<select id="cnt" parameterType="long" resultType="int">
-		select count(cno) cnt from b_comment where bno = #{bno}
-	</select>
-	
-	<update id="mod" parameterType="cvo" >
-		update  b_comment set 
-		content = #{content},
-		mod_at = now()
+	<update id="updateBComment" parameterType="bcvo">
+		update b_comment
+		set content = #{content}, mod_at = now()
 		where cno = #{cno}
 	</update>
-
-	<delete id="del" parameterType="long">
+	<delete id="deleteOneBComment" parameterType="long">
 		delete from b_comment where cno = #{cno}
 	</delete>
-	
-	<delete id="delAll" parameterType="long">
+	<delete id="deleteAllBComment" parameterType="long">
 		delete from b_comment where bno = #{bno}
 	</delete>
-
 </mapper>

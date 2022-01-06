@@ -14,15 +14,56 @@
 
     <div class="row g-5">
       <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Your cart</span>
+          <span class="badge bg-primary rounded-pill">3</span>
+        </h4>
+        <ul class="list-group mb-3">
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Product name</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">$12</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Second product</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">$8</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0">Third item</h6>
+              <small class="text-muted">Brief description</small>
+            </div>
+            <span class="text-muted">$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+              <h6 class="my-0">Promo code</h6>
+              <small>EXAMPLECODE</small>
+            </div>
+            <span class="text-success">−$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total (USD)</span>
+            <strong>$20</strong>
+          </li>
+        </ul>
 
-        
+        <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Promo code">
+            <button type="submit" class="btn btn-secondary">Redeem</button>
+          </div>
+        </form>
       </div>
       
-<!-- 상품상세정보란 시작 -->
+<!-- 게시글상세정보란 시작 -->
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Board information</h4>
-        <form action="/board/remove" method="post">
-        <input type="hidden" name="bno" value="${bvo.bno }">
           <div class="row g-3">
 
             <div class="col-12">
@@ -36,18 +77,16 @@
             
             <div class="col-12">
               <label for="regAt" class="form-label">Reg At</label>
-              <input type="text" class="form-control" id="regAt" value="${bvo.regAt }" readOnly>              
+              <input type="text" class="form-control" value="${bvo.regAt }" readOnly>              
             </div>
             <div class="col-12">
               <label for="modAt" class="form-label">Mod At</label>
-              <input type="text" class="form-control" id="modAt" value="${bvo.modAt }" readOnly>              
+              <input type="text" class="form-control" value="${bvo.modAt }" readOnly>              
             </div>
             <div class="col-12">
               <label for="readCount" class="form-label">Read Count</label>
-              <input type="text" class="form-control" id="readCount" value="${bvo.readCount }" readOnly>              
+              <input type="text" class="form-control" value="${bvo.readCount }" readOnly>              
             </div>
-           
-            
             <div class="col-12">
               <label for="title" class="form-label">Title</label>
               <input type="text" class="form-control" name="title"
@@ -55,93 +94,87 @@
             </div>
 
             <div class="col-12">
-              <label for="content" class="form-label">Content</label>
+              <label for="cont" class="form-label">Content</label>
               <textarea class="form-control" name="content" readOnly
-               id="content" placeholder="Content">${bvo.content }</textarea>              
+               id="cont" placeholder="Content">${bvo.content }</textarea>              
             </div>
-
-          
-
             
-    		<div class="col-4">
-    		<a href="/board/list?pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" class="btn btn-outline-primary">LIST</a>
-    		</div>
 			<div class="col-4">
-    	   	<a href="/board/modify?bno=${bvo.bno }&pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" type="button" id="modBtn" class="btn btn-outline-warning">MOD</a>
+			<a href="/board/list?pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" class="btn btn-primary">LIST</a>
 			</div>
 			<div class="col-4">
-    		<button type="submit" id="delBtn" class="btn btn-outline-danger">DEL</button>
+			<a href="/board/modify?bno=${bvo.bno }&pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" id="modBtn" class="btn btn-outline-warning">MOD</a>
 			</div>
-        </div>	
-        </form>
+			<div class="col-4">
+    		<button type="button" id="delBtn" class="btn btn-outline-danger">DEL</button>
+			</div>
+    	   	
+        </div>
       </div>
-      <div class="input-group">
-      	  <span class="input-group-text" id="cmtWriter">${ses.email }</span>
-		  <input type="text" class="form-control" id="cmtText">
-		  
-		  <button class="btn btn-outline-primary" id="cmtPostBtn" type="button">Add Comment</button>
-		</div>
-		
-		<ul class="list-group list-group-flush " id="cmtListArea">
-  			<li class="list-group-item d-flex justify-content-between align-items-center">
-  			  <div class="ms-2 me-auto">
-    		  <div class="fw-bold">writer</div>
-   			   Content for list item
- 		      </div>
-    		  <span class="badge bg-primary rounded-pill">modAt</span>
-  			</li>
-  		</ul>
-  		<!-- The Modal -->
-		<div class="modal" id="myModal">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		
-		      <!-- Modal Header -->
-		      <div class="modal-header">
-		        <h4 class="modal-title">${ses.email }</h4>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-		      </div>
-		
-		      <!-- Modal body -->
-		      <div class="modal-body">
-		      	 <div class="input-group">
-		      	 	 
-			 		 <input type="text" class="form-control" id="cmtModText">
-					 <button class="btn btn-outline-primary" id="cmtModBtn" type="button">Modify Comment</button>
-				</div>
-		      </div>
-		
-		      <!-- Modal footer -->
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" id="modalClose" data-bs-dismiss="modal">Close</button>
-		      </div>
-		
-		    </div>
-		  </div>
-		</div>
-
-      
     </div>
   </main>
 </div>
-<form action="/product/remove" method="post" id="delForm">
-	<input type="hidden" name="pno" value="${pvo.pno }">
-	<input type="text" name="pageNo" value="${pgvo.pageNo }">
-        <input type="text" name="type" value="${pgvo.type }">
-        <input type="text" name="keyword" value="${pgvo.keyword }">
+<form action="/board/remove" method="post" id="delForm">
+	<input type="hidden" name="bno" value="${bvo.bno }">
+	<input type="hidden" name="pageNo" value="${pgvo.pageNo }">
+    <input type="hidden" name="qty" value="${pgvo.qty }">
+    <input type="hidden" name="type" value="${pgvo.type }">
+    <input type="hidden" name="keyword" value="${pgvo.keyword }">
 </form>
+<!-- 댓글영역 시작 -->
+<div class="container">
+<div class="input-group my-3">
+	<span class="input-group-text" id="cmtWriter">Anonymous</span>
+	<input type="text" class="form-control" id="cmtText" value="Test Add Comment ">
+	<button class="btn btn-success" id="cmtPostBtn" type="button">Post</button>
+</div>
+<ul class="list-group list-group-flush" id="cmtListArea">
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Writer</div>
+      Content for Comment
+    </div>
+    <span class="badge bg-dark rounded-pill">modAt</span>
+  </li>
+</ul>
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-<script type="text/javascript">
-const pnoVal = document.querySelector("input[name=bno]").value;
-const ses = '<c:out value="${ses.email}"/>'
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Anonymous</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="input-group my-3">
+			<input type="text" class="form-control" id="cmtTextMod">
+			<button class="btn btn-success" id="cmtModBtn" type="button">Post</button>
+		</div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+<script>
+/* const pnoVal = document.querySelector("input[name=bno]").value; */
+/* console.log(pnoVal); */
 </script>
 <script src="/resources/js/board.detail.js"></script>
-<!-- <script src="/resources/js/product.comment.js"></script> -->
+<script src="/resources/js/board.comment.js"></script>
 <script>
 let isMod = '<c:out value="${isMod}"/>';
 if (parseInt(isMod)) {
-	alert('상품 수정 성공~');
+	alert('게시글 수정 성공~');
 }
-getCommentList(pnoVal);
 </script>
 <jsp:include page="../common/footer.jsp" />

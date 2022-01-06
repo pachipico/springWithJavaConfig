@@ -28,6 +28,8 @@
 			</trim>
 		</if>
 	</sql>
+	
+	
 
 	<insert id="insertBoard" parameterType="bvo">
 		insert into board(title,
