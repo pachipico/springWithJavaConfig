@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.myweb.www.domain.BCommentVO;
+import com.myweb.www.domain.PagingVO;
+import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.service.BCommentService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -47,10 +49,13 @@ public class BCommentController {
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@GetMapping(value = "/{pno}", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<List<BCommentVO>> spread(@PathVariable("pno") long pno){		
-		log.debug("pno >>>>>>>>> {} ", pno);
-		return new ResponseEntity<List<BCommentVO>>(csv.getList(pno),
+	@GetMapping(value = "/{bno}/{page}", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public ResponseEntity<PagingHandler> spread(@PathVariable("bno") long bno, @PathVariable("page") int page){		
+		log.debug("pno >>>>>>>>> {} ", bno);
+		PagingVO pgvo = new PagingVO(page, 10);
+		PagingHandler phd = csv.getList(bno, pgvo);
+		log.debug("handler {}",phd);
+		return new ResponseEntity<PagingHandler>(phd,
 									HttpStatus.OK);
 	}
 	

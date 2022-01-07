@@ -137,6 +137,14 @@
     <span class="badge bg-dark rounded-pill">modAt</span>
   </li>
 </ul>
+<div class="row">
+	<div class="col"></div>
+	<div class="col d-grid">
+		<button class="btn btn-outline-secondary btn-block" id="moreBtn" data-page="1" style="visibility: hidden;">more... </button>
+	</div>
+	<div class="col"></div>
+</div>
+
 <!-- The Modal -->
 <div class="modal" id="myModal">
   <div class="modal-dialog">
@@ -166,12 +174,13 @@
 </div>
 </div>
 <script>
-/* const pnoVal = document.querySelector("input[name=bno]").value; */
+const bnoVal = document.querySelector("input[name=bno]").value;
 /* console.log(pnoVal); */
 </script>
 <script src="/resources/js/board.detail.js"></script>
 <script src="/resources/js/board.comment.js"></script>
 <script>
+ 
 let isMod = '<c:out value="${isMod}"/>';
 if (parseInt(isMod)) {
 	alert('게시글 수정 성공~');

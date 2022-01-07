@@ -7,9 +7,15 @@
 		insert into b_comment (bno, writer, content)
 		values (#{bno}, #{writer}, #{content})
 	</insert>	
-	<select id="selectListBComment" resultType="bcvo">
-		select cno, writer, content, mod_at
-		from b_comment where bno = #{bno}
+	<select id="selectListBComment"  resultType="bcvo">
+		select a.cno, writer, content, mod_at
+		from (
+			select cno from b_comment where bno = #{bno}
+			limit #{pgvo.pageStart}, #{pgvo.qty}
+		) a inner join b_comment b on a.cno = b.cno 
+	</select>
+	<select id="selectOneBCommentTotalCount" parameterType="long" resultType="int" >
+		select count(cno) from b_comment where bno = #{bno}
 	</select>
 	<update id="updateBComment" parameterType="bcvo">
 		update b_comment

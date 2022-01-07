@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.www.domain.BCommentVO;
+import com.myweb.www.domain.PagingVO;
+import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.repository.BCommentDAO;
 import com.myweb.www.repository.ProductDAO;
 
@@ -28,8 +30,12 @@ public class BCommentServiceImpl implements BCommentService {
 	}
 
 	@Override
-	public List<BCommentVO> getList(long pno) {
-		return cdao.selectListBComment(pno);
+	public PagingHandler getList(long bno, PagingVO pgvo) {
+		int totalCount = cdao.selectOneBCommentTotalCount(bno);
+		List<BCommentVO> list = cdao.selectListBComment(bno, pgvo);
+		PagingHandler phd = new PagingHandler(pgvo, totalCount, list);
+		
+		return phd;
 	}
 
 	@Override

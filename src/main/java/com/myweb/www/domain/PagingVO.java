@@ -28,7 +28,6 @@ public class PagingVO {
 	}
 	
 	public String[] getTypeToArr() {
-		System.out.println(type.split(""));
 		return type == null ? new String[] {} : type.split("");
 	}
 
