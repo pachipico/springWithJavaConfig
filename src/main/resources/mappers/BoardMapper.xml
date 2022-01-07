@@ -75,6 +75,7 @@
 		mod_at = now()
 		where bno = #{bno}
 	</update>
+	
 
 	<update id="updateReadCntBoard" parameterType="long">
 		update board set

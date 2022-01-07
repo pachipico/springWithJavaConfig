@@ -4,15 +4,13 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.www.domain.BCommentVO;
+import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.repository.BCommentDAO;
-import com.myweb.www.repository.ProductDAO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,7 +22,7 @@ public class BCommentServiceImpl implements BCommentService {
 	private BCommentDAO cdao;
 	
 	@Override
-	public int register(BCommentVO cvo) {
+	public int register(CommentVO cvo) {
 		int isUp = cdao.insertBComment(cvo);
 		return isUp;
 	}
@@ -32,14 +30,14 @@ public class BCommentServiceImpl implements BCommentService {
 	@Override
 	public PagingHandler getList(long bno, PagingVO pgvo) {
 		int totalCount = cdao.selectOneBCommentTotalCount(bno);
-		List<BCommentVO> list = cdao.selectListBComment(bno, pgvo);
-		PagingHandler phd = new PagingHandler(pgvo, totalCount, list);
+		List<CommentVO> list = cdao.selectListBComment(bno, pgvo);
+		PagingHandler phd = new PagingHandler(pgvo, list, totalCount);
 		
 		return phd;
 	}
 
 	@Override
-	public int modify(BCommentVO cvo) {
+	public int modify(CommentVO cvo) {
 		return cdao.updateBComment(cvo);
 	}
 

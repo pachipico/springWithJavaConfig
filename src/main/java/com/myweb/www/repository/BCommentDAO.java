@@ -5,16 +5,17 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.myweb.www.domain.BCommentVO;
+import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
 
 public interface BCommentDAO {
-	int insertBComment(BCommentVO cvo);
+	int insertBComment(CommentVO cvo);
 
-	List<BCommentVO> selectListBComment(@Param("bno") long bno, @Param("pgvo") PagingVO pgvo);
+	List<CommentVO> selectListBComment(@Param("bno") long bno, @Param("pgvo") PagingVO pgvo);
 
 	int selectOneBCommentTotalCount(long bno);
 
-	int updateBComment(BCommentVO cvo);
+	int updateBComment(CommentVO cvo);
 
 	int deleteOneBComment(long cno);
 

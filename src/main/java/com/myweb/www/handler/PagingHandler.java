@@ -3,6 +3,7 @@ package com.myweb.www.handler;
 import java.util.List;
 
 import com.myweb.www.domain.BCommentVO;
+import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
 
 import lombok.Getter;
@@ -22,7 +23,8 @@ public class PagingHandler {
 	private int totalCount;
 	private PagingVO pgvo;
 
-	private List<BCommentVO> cmtList;
+	
+	private List<CommentVO> list;
 
 	public PagingHandler(PagingVO pgvo, int totalCount) {
 		this.totalCount = totalCount;
@@ -38,9 +40,13 @@ public class PagingHandler {
 		next = endPage < realEndPage;
 	}
 
-	public PagingHandler(PagingVO pgvo, int totalCount, List<BCommentVO> cmtList) {
-		this(pgvo, totalCount);
-		this.cmtList = cmtList;
-	}
+//	public PagingHandler(PagingVO pgvo, int totalCount, List<BCommentVO> cmtList) {
+//		this(pgvo, totalCount);
+//		this.cmtList = cmtList;
+//	}
 
+	public PagingHandler(PagingVO pgvo, List<CommentVO> list, int totalCount) {
+		this(pgvo, totalCount);
+		this.list = list;
+	}
 }

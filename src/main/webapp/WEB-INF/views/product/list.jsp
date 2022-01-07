@@ -43,6 +43,7 @@
 	  <th scope="col">Made By</th>      
       <th scope="col">Writer</th>
       <th scope="col">Read Count</th>
+      <th scope="col">Qty</th>
       <th scope="col">Mod At</th>
     </tr>
   </thead>
@@ -55,6 +56,7 @@
       <td>${pvo.madeBy }</td>
       <td>${pvo.writer }</td>
       <td>${pvo.readCount }</td>
+      <td>${pvo.cmtQty }</td>
       <td>${pvo.modAt }</td>
     </tr>
     </c:forEach>    

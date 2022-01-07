@@ -126,7 +126,11 @@
 <div class="input-group my-3">
 	<span class="input-group-text" id="cmtWriter">Anonymous</span>
 	<input type="text" class="form-control" id="cmtText" value="Test Add Comment ">
-	<button class="btn btn-success" id="cmtPostBtn" type="button">Post</button>
+	<button class="btn btn-success position-relative" id="cmtPostBtn" type="button">Post
+  			<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    		<span id="cmtCnt"></span>개	
+    		<span class="visually-hidden">unread messages</span></span>
+	</button>
 </div>
 <ul class="list-group list-group-flush" id="cmtListArea">
   <li class="list-group-item d-flex justify-content-between align-items-start">

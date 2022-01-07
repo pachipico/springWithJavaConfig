@@ -24,7 +24,7 @@
 			<div class="col-md-7 col-lg-8">
 				<h4 class="mb-3">Board information</h4>
 				<form action="/board/remove" method="post">
-					<input type="text" name="bno" value="${pvo.pno }"> <input
+					<input type="text" name="pno" value="${pvo.pno }"> <input
 						type="text" name="type" value="${pgvo.type }"> <input
 						type="text" name="keyword" value="${pgvo.keyword }">
 					<div class="row g-3">
@@ -98,71 +98,81 @@
 					</div>
 				</form>
 			</div>
-			<div class="input-group">
-				<span class="input-group-text" id="cmtWriter">${ses.email }</span> <input
-					type="text" class="form-control" id="cmtText">
-
-				<button class="btn btn-outline-primary" id="cmtPostBtn"
-					type="button">Add Comment</button>
-			</div>
-
-			<ul class="list-group list-group-flush " id="cmtListArea">
-				<li
-					class="list-group-item d-flex justify-content-between align-items-center">
-					<div class="ms-2 me-auto">
-						<div class="fw-bold">writer</div>
-						Content for list item
-					</div> <span class="badge bg-primary rounded-pill">modAt</span>
-				</li>
-			</ul>
-			<!-- The Modal -->
-			<div class="modal" id="myModal">
-				<div class="modal-dialog">
-					<div class="modal-content">
-
-						<!-- Modal Header -->
-						<div class="modal-header">
-							<h4 class="modal-title">${ses.email }</h4>
-							<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-						</div>
-
-						<!-- Modal body -->
-						<div class="modal-body">
-							<div class="input-group">
-
-								<input type="text" class="form-control" id="cmtModText">
-								<button class="btn btn-outline-primary" id="cmtModBtn"
-									type="button">Modify Comment</button>
-							</div>
-						</div>
-
-						<!-- Modal footer -->
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" id="modalClose"
-								data-bs-dismiss="modal">Close</button>
-						</div>
-
-					</div>
-				</div>
-			</div>
-
+		
+		
+	
 
 		</div>
 	</main>
 </div>
 <form action="/product/remove" method="post" id="delForm">
 	<input type="hidden" name="pno" value="${pvo.pno }"> <input
-		type="text" name="pageNo" value="${pgvo.pageNo }"> <input
-		type="text" name="type" value="${pgvo.type }"> <input
-		type="text" name="keyword" value="${pgvo.keyword }">
+		type="hidden" name="pageNo" value="${pgvo.pageNo }"> <input
+		type="hidden" name="type" value="${pgvo.type }"> <input
+		type="hidden" name="keyword" value="${pgvo.keyword }">
 </form>
+<!-- 댓글영역 시작 -->
+<div class="container">
+<div class="input-group my-3">
+	<span class="input-group-text" id="cmtWriter">Anonymous</span>
+	<input type="text" class="form-control" id="cmtText" value="Test Add Comment ">
+	<button class="btn btn-success position-relative" id="cmtPostBtn" type="button">Post
+  			<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    		<span id="cmtCnt"></span>개	
+    		<span class="visually-hidden">unread messages</span></span>
+	</button>
+</div>
+<ul class="list-group list-group-flush" id="cmtListArea">
+  <li class="list-group-item d-flex justify-content-between align-items-start">
+    <div class="ms-2 me-auto">
+      <div class="fw-bold">Writer</div>
+      Content for Comment
+    </div>
+    <span class="badge bg-dark rounded-pill">modAt</span>
+  </li>
+</ul>
+<div class="row">
+	<div class="col"></div>
+	<div class="col d-grid">
+		<button class="btn btn-outline-secondary btn-block" id="moreBtn" data-page="1" style="visibility: hidden;">more... </button>
+	</div>
+	<div class="col"></div>
+</div>
 
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Anonymous</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <div class="input-group my-3">
+			<input type="text" class="form-control" id="cmtTextMod">
+			<button class="btn btn-success" id="cmtModBtn" type="button">Post</button>
+		</div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
 <script type="text/javascript">
-	const pnoVal = document.querySelector("input[name=bno]").value;
+	const pnoVal = document.querySelector("input[name=pno]").value;
 	const ses = '<c:out value="${ses.email}"/>'
 </script>
 <script src="/resources/js/board.detail.js"></script>
-<!-- <script src="/resources/js/product.comment.js"></script> -->
+<script src="/resources/js/product.comment.js"></script> 
 <script>
 	let isMod = '<c:out value="${isMod}"/>';
 	if (parseInt(isMod)) {

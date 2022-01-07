@@ -1,11 +1,7 @@
 package com.myweb.www.ctrl;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.myweb.www.domain.BCommentVO;
+import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.service.BCommentService;
@@ -36,7 +32,7 @@ public class BCommentController {
 	@PutMapping(value = "/{cno}", consumes = "application/json",
 			produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> edit(@PathVariable("cno") long cno, 
-										@RequestBody BCommentVO cvo){
+										@RequestBody CommentVO cvo){
 		return csv.modify(cvo) > 0 ?
 				new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,7 +57,7 @@ public class BCommentController {
 	
 	@PostMapping(value = "/post", consumes = "application/json", 
 			produces = {MediaType.TEXT_PLAIN_VALUE})
-	public ResponseEntity<String> post(@RequestBody BCommentVO cvo){
+	public ResponseEntity<String> post(@RequestBody CommentVO cvo){
 		log.debug(">>> {}", cvo);		
 		return csv.register(cvo) > 0 ?
 				new ResponseEntity<String>("1", HttpStatus.OK)

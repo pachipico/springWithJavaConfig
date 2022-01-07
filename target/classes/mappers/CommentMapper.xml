@@ -2,30 +2,37 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.myweb.www.repository.BCommentDAO">
-	<insert id="insertBComment" parameterType="bcvo">
-		insert into b_comment (bno, writer, content)
-		values (#{bno}, #{writer}, #{content})
-	</insert>	
-	<select id="selectListBComment"  resultType="bcvo">
-		select a.cno, writer, content, mod_at
+<mapper namespace="com.myweb.www.repository.CommentDAO">
+	<insert id="insertComment" parameterType="cvo">
+		insert into comment
+		(pno, writer, content)
+		values (#{pno}, #{writer}, #{content})
+	</insert>
+	<select id="selectListComment" resultType="cvo">
+		select a.cno, writer,
+		content, mod_at
 		from (
-			select cno from b_comment where bno = #{bno}
-			limit #{pgvo.pageStart}, #{pgvo.qty}
-		) a inner join b_comment b on a.cno = b.cno 
+		select cno from comment where pno = #{pno}
+		limit #{pgvo.pageStart}, #{pgvo.qty}
+		) a inner join comment b on a.cno =
+		b.cno
 	</select>
-	<select id="selectOneBCommentTotalCount" parameterType="long" resultType="int" >
-		select count(cno) from b_comment where bno = #{bno}
+	<select id="selectCntComment" parameterType="long"
+		resultType="int">
+		select count(cno) from comment where pno = #{pno}
 	</select>
-	<update id="updateBComment" parameterType="bcvo">
-		update b_comment
-		set content = #{content}, mod_at = now()
+	<update id="updateComment" parameterType="cvo">
+		update comment
+		set
+		content = #{content}, mod_at = now()
 		where cno = #{cno}
 	</update>
-	<delete id="deleteOneBComment" parameterType="long">
-		delete from b_comment where cno = #{cno}
+	<delete id="deleteComment" parameterType="long">
+		delete from comment
+		where cno = #{cno}
 	</delete>
-	<delete id="deleteAllBComment" parameterType="long">
-		delete from b_comment where bno = #{bno}
+	<delete id="deleteAllComment" parameterType="long">
+		delete from comment
+		where pno = #{pno}
 	</delete>
 </mapper>

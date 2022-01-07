@@ -45,6 +45,7 @@
       <th scope="col">Title</th>
       <th scope="col">Writer</th>
       <th scope="col">Read Count</th>
+      <!-- <th scope="col">Qty</th> -->
       <th scope="col">Mod At</th>
     </tr>
   </thead>
@@ -55,6 +56,7 @@
       <td><a href="/board/detail?bno=${bvo.bno }&pageNo=${pgn.pgvo.pageNo}&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">${bvo.title }</a></td>
       <td>${bvo.writer }</td>
       <td>${bvo.readCount }</td>
+      <%-- <td>${bvo.cmtQty }</td> --%>
       <td>${bvo.modAt }</td>
     </tr>
     </c:forEach>    
