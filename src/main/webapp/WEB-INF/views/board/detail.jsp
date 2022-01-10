@@ -134,13 +134,13 @@
 	</button>
 </div>
 <ul class="list-group list-group-flush" id="cmtListArea">
-  <li class="list-group-item d-flex justify-content-between align-items-start">
+ <!--  <li class="list-group-item d-flex justify-content-between align-items-start">
     <div class="ms-2 me-auto">
       <div class="fw-bold">Writer</div>
       Content for Comment
     </div>
     <span class="badge bg-dark rounded-pill">modAt</span>
-  </li>
+  </li> -->
 </ul>
 <div class="row" id="cmtPaging">
 	<ul class="pagination justify-content-center">

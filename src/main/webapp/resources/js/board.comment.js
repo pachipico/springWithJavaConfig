@@ -1,7 +1,8 @@
 let currPage = 1;
 async function postCommentToServer(cmtData) {
+  console.log(cmtData);
   try {
-    const url = "/bcomment/post/";
+    const url = "/bcomment/post";
     const config = {
       method: "post",
       headers: {
@@ -18,7 +19,6 @@ async function postCommentToServer(cmtData) {
 }
 document.getElementById("cmtPostBtn").addEventListener("click", () => {
   const cmtText = document.getElementById("cmtText");
-  console.log(`comment text = ${cmtText}`);
   if (cmtText.value == null || cmtText.value == "") {
     alert("댓글 내용을 입력해주세요!");
     cmtText.focus();

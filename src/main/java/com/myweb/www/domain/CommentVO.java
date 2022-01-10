@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @ToString
 public class CommentVO {
 	private Long cno;
+	private Long bno;
 	private Long pno;
 	private String writer;
 	private String content;

@@ -19,5 +19,6 @@ public class BoardVO {
 	private String modAt;
 	private int readCount;
 	private int attached;
+	private int cmtQty;
 
 }

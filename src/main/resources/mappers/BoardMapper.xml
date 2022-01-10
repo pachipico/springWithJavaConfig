@@ -53,12 +53,12 @@
 
 	<select id="selectListBoardPaging" parameterType="pgvo"
 		resultType="bvo">
-		select a.bno, title, writer, mod_at, read_count , count(f.uuid) attached from
+		select a.bno, b.title, b.writer, b.mod_at, b.read_count , count(c.cno) cmt_qty, count(f.uuid) attached from
 		(select bno from
 		board where bno > 0
 		<include refid="search" />
 		order by bno desc
-		limit #{pageStart}, #{qty}) a left join board b on a.bno = b.bno left join b_file f on f.bno = a.bno group by a.bno
+		limit #{pageStart}, #{qty}) a left join board b on a.bno = b.bno left join b_file f on f.bno = a.bno left join b_comment c on a.bno = c.bno group by a.bno
 		
 	</select>
 
