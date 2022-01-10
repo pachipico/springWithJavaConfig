@@ -92,7 +92,9 @@
   				 id="files" name="files" multiple>
   				<button type="button" id="trigger" class="btn btn-outline-primary btn-block">files upload</button>
 			</div>
-
+			<div class="col-12" id="fileZone">
+			
+			</div>
           <button class="w-100 btn btn-primary btn-lg my-5" id="regBtn" type="submit">Continue to Register</button>
         </div>
         </form>

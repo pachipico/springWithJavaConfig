@@ -30,10 +30,7 @@ public class BoardServiceImpl implements BoardService {
 		int isUp = bdao.insertBoard(bdto.getBvo());
 		if(isUp > 0 && bdto.getBfList().size() > 0) {
 			Long bno = bdao.selectOneBno();
-//			bdto.getBfList().forEach((file) -> {
-//				
-//				bfdao.insertBFile(file);
-//			});
+
 			for(BFileVO bfvo: bdto.getBfList()) {
 				bfvo.setBno(bno);
 				isUp *= bfdao.insertBFile(bfvo);
@@ -57,6 +54,8 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public BoardVO getDetail(Long bno) {
 		BoardVO bvo = bdao.selectOneBoard(bno);
+		
+		bfdao.selectListBFile(bno);
 		if(bvo != null) {
 			bdao.updateReadCntBoard(bno);
 		}

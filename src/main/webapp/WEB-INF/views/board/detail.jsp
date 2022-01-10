@@ -98,6 +98,7 @@
               <textarea class="form-control" name="content" readOnly
                id="cont" placeholder="Content">${bvo.content }</textarea>              
             </div>
+           
             
 			<div class="col-4">
 			<a href="/board/list?pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" class="btn btn-primary">LIST</a>

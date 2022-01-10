@@ -47,6 +47,7 @@
       <th scope="col">Read Count</th>
       <!-- <th scope="col">Qty</th> -->
       <th scope="col">Mod At</th>
+      <th scope="col">Attached</th>
     </tr>
   </thead>
   <tbody>
@@ -58,6 +59,7 @@
       <td>${bvo.readCount }</td>
       <%-- <td>${bvo.cmtQty }</td> --%>
       <td>${bvo.modAt }</td>
+      <td>${bvo.attached > 0 ? '첨부파일' : ''}</td>
     </tr>
     </c:forEach>    
   </tbody>
