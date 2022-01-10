@@ -22,7 +22,7 @@
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Board information modify</h4>
         <form action="/product/modify" method="post">
-        <input type="hidden" name="bno" value="${bvo.bno }">
+        <input type="text" name="pno" value="${pvo.pno }">
         <input type="text" name="pageNo" value="${pgvo.pageNo }">
         <input type="text" name="type" value="${pgvo.type }">
         <input type="text" name="keyword" value="${pgvo.keyword }">
@@ -79,8 +79,8 @@
 							<input type="text" class="form-control" name="madeBy" id="madeBy" value="${pvo.madeBy }"   >
 						</div>
 						<div class="col-12">
-							<label for="desc" class="form-label">Description</label>
-							<textarea id="desc" class="form-control" name="desc"  >${pvo.description }</textarea>
+							<label for="description" class="form-label">Description</label>
+							<textarea id="description" class="form-control" name="description"  >${pvo.description }</textarea>
 						</div>
 
     		<button type="submit" id="modBtn" class="btn btn-outline-primary">edit</button>

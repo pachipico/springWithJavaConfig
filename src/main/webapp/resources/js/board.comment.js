@@ -1,3 +1,4 @@
+let currPage = 1;
 async function postCommentToServer(cmtData) {
   try {
     const url = "/bcomment/post/";
@@ -77,6 +78,7 @@ function getCommentList(bno, page = 1) {
 const printPagination = ({ next, prev, startPage, endPage, pgvo }) => {
   let pgn = document.getElementById("cmtPaging");
   pgn.innerHTML = "";
+  currPage = pgvo.pageNo;
   let ul = '<ul class="pagination justify-content-center">';
   if (prev) {
     ul += `<li class="page-item">
@@ -135,10 +137,10 @@ async function editCommentToServer(cmtDataMod) {
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("del")) {
     let li = e.target.closest("li");
-    let cnoVal = li.dataset.cno;
-    eraseCommentAtServer(cnoVal).then((result) => {
+    let cno = li.dataset.cno;
+    eraseCommentAtServer(cno).then((result) => {
       alert("댓글 삭제 성공~");
-      getCommentList(bnoVal);
+      getCommentList(bnoVal, currPage);
     });
   } else if (e.target.classList.contains("mod")) {
     let li = e.target.closest("li");
@@ -154,7 +156,7 @@ document.addEventListener("click", (e) => {
       if (parseInt(result)) {
         document.querySelector(".btn-close").click();
       }
-      getCommentList(bnoVal);
+      getCommentList(bnoVal, currPage);
     });
   } else if (e.target.classList.contains("page-link")) {
     e.preventDefault();

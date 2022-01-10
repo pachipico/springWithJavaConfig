@@ -64,7 +64,7 @@
 <!-- 상품등록란 시작 -->
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Input product information</h4>
-        <form action="/board/register" method="post">
+        <form action="/board/register" method="post" enctype="multipart/form-data">
           <div class="row g-3">
           
           	<div class="col-12">
@@ -87,13 +87,18 @@
               <textarea class="form-control" name="content"
                id="desc" placeholder="Content"></textarea>              
             </div>
+            <div class=" col-12 d-grid">
+  				<input class="form-control" type="file" style=""
+  				 id="files" name="files" multiple>
+  				<button type="button" id="trigger" class="btn btn-outline-primary btn-block">files upload</button>
+			</div>
 
-          <button class="w-100 btn btn-primary btn-lg my-5" type="submit">Continue to Register</button>
+          <button class="w-100 btn btn-primary btn-lg my-5" id="regBtn" type="submit">Continue to Register</button>
         </div>
         </form>
       </div>
     </div>
   </main>
 </div>
-
+<script src="/resources/js/board.register.js"></script>
 <jsp:include page="../common/footer.jsp" />

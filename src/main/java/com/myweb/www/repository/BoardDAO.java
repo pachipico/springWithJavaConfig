@@ -14,4 +14,5 @@ public interface BoardDAO {
 	int updateReadCntBoard(Long bno);
 	int deleteBoard(Long bno);
 	int selectOneTotalCount(PagingVO pagingVO);
+	Long selectOneBno();
 }

@@ -12,5 +12,6 @@
 		<typeAlias type="com.myweb.www.domain.BCommentVO" alias="bcvo"/>
 		<typeAlias type="com.myweb.www.domain.CommentVO" alias="cvo"/>
 		<typeAlias type="com.myweb.www.domain.PagingVO" alias="pgvo"/>
+		<typeAlias type="com.myweb.www.domain.BFileVO" alias="bfvo"/>
 	</typeAliases>
 </configuration>

@@ -6,8 +6,11 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import com.myweb.www.domain.BFileVO;
+import com.myweb.www.domain.BoardDTO;
 import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.PagingVO;
+import com.myweb.www.repository.BFileDAO;
 import com.myweb.www.repository.BoardDAO;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +22,24 @@ public class BoardServiceImpl implements BoardService {
 	@Inject
 	BoardDAO bdao;
 	
+	@Inject
+	BFileDAO bfdao;
+	
 	@Override
-	public int register(BoardVO bvo) {
-		
-		return bdao.insertBoard(bvo);
+	public int register(BoardDTO bdto) {
+		int isUp = bdao.insertBoard(bdto.getBvo());
+		if(isUp > 0 && bdto.getBfList().size() > 0) {
+			Long bno = bdao.selectOneBno();
+//			bdto.getBfList().forEach((file) -> {
+//				
+//				bfdao.insertBFile(file);
+//			});
+			for(BFileVO bfvo: bdto.getBfList()) {
+				bfvo.setBno(bno);
+				isUp *= bfdao.insertBFile(bfvo);
+			}
+		}
+		return isUp;
 	}
 
 	@Override

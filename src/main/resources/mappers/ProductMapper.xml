@@ -69,6 +69,7 @@
 		description = #{description},
 		made_by = #{madeBy},
 		mod_at = now()
+		where pno = #{pno}
 	</update>
 
 	<update id="updateQtyUp" parameterType="long">

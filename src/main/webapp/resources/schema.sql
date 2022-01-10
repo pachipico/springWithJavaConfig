@@ -22,3 +22,14 @@ create table b_comment (
 );
 
 
+drop table if exists b_file;
+
+create table b_file(
+	uuid varchar(256) primary key,
+	save_dir varchar(256) not null,
+	file_name varchar(512) not null,
+	file_type tinyint(1) default 0,
+	bno bigint(11),
+	file_size bigint,
+	reg_at datetime default (now())
+);

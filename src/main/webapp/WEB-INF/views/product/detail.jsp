@@ -131,12 +131,23 @@
     <span class="badge bg-dark rounded-pill">modAt</span>
   </li>
 </ul>
-<div class="row">
-	<div class="col"></div>
-	<div class="col d-grid">
-		<button class="btn btn-outline-secondary btn-block" id="moreBtn" data-page="1" style="visibility: hidden;">more... </button>
-	</div>
-	<div class="col"></div>
+<div class="row" id="cmtPaging">
+
+	<ul class="pagination justify-content-center">
+	    <li class="page-item">
+	      <a href="" class="page-link">Prev</a>
+	    </li>
+	    
+	    <li class="page-item"
+	     aria-current="page">
+	      <a class="page-link" href="">${i }</a>
+	    </li>
+	    
+	    <li class="page-item">
+	      <a class="page-link" href="">Next</a>
+	    </li>
+    
+  </ul>
 </div>
 
 <!-- The Modal -->

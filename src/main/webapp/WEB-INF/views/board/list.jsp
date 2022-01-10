@@ -6,7 +6,7 @@
 <div class="container my-3">
 <div class="row">
 	<div class="col-sm-12 col-md-6">
-		<h2>Product List
+		<h2>Board List
 			<a href="/board/register" class="btn btn-outline-primary">REG</a>
 		</h2>	
 	</div>
@@ -80,6 +80,8 @@
     </li>
     </c:if>
   </ul>
+   <a href="/board/list?pageNo=1&qty=${pgn.pgvo.qty }&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}" class="btn">처음으로</a>
+  <a class="btn" href="/board/list?pageNo=${pgn.realEndPage }&qty=${pgn.pgvo.qty }&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">마지막으로</a>
 </div>
 <script>
 let isUp = '<c:out value="${isUp}"/>';

@@ -79,7 +79,7 @@
     </li>
   </ul>
   <a href="/product/list?pageNo=1&qty=${pgn.pgvo.qty }&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}" class="btn">처음으로</a>
-  <a class="btn">마지막으로</a>
+  <a class="btn" href="/product/list?pageNo=${pgn.realEndPage }&qty=${pgn.pgvo.qty }&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">마지막으로</a>
 </div>
 <script>
 let isReg = '<c:out value="${isReg}"/>';

@@ -2,6 +2,7 @@ package com.myweb.www.config;
 
 
 import javax.servlet.Filter;
+import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -35,6 +36,12 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 	@Override
 	protected void customizeRegistration(ServletRegistration.Dynamic registration) {
 		registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+		String uploadLocation = "/Users/jhs/Desktop/ezenSpring/fileUpload";
+		int maxFileSize = 1024 * 1024 ;
+		int maxReqSize = maxFileSize * 5;
+		int fileSizeThreshold = maxReqSize; //메모리 에서 파일을 전송할때 만들어지는 임시 공간 	
+		MultipartConfigElement multipartConfigElement = new MultipartConfigElement(uploadLocation, maxFileSize, maxReqSize, fileSizeThreshold);
+		registration.setMultipartConfig(multipartConfigElement);
 	}
 	
 

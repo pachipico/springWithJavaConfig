@@ -47,6 +47,7 @@ public class ProductController {
 	@PostMapping("/modify")
 	public String modify(ProductVO pvo, @ModelAttribute("pgvo") PagingVO pgvo , RedirectAttributes reAttr) {
 		reAttr.addFlashAttribute("isUp", psv.modify(pvo));
+		reAttr.addFlashAttribute("pgvo", pgvo);
 		return "redirect:/product/detail?pno="+ pvo.getPno();
 	}
 	
