@@ -52,8 +52,8 @@ function getCommentList(bno, page = 1) {
   console.log("getCommentList  called " + bno);
   spreadCommentFromServer(bno, page).then((result) => {
     console.log(result);
+    const ul = document.getElementById("cmtListArea");
     if (result.list.length) {
-      const ul = document.getElementById("cmtListArea");
       ul.innerHTML = "";
       document.getElementById("cmtCnt").innerText = result.totalCount;
       for (let cvo of result.list) {

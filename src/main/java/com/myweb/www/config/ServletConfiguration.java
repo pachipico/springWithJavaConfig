@@ -20,7 +20,7 @@ public class ServletConfiguration implements WebMvcConfigurer {
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-		registry.addResourceHandler("/fileUpload/**").addResourceLocations("/Users/jhs/Desktop/ezenSpring/fileUpload/");
+		registry.addResourceHandler("/fileUpload/**").addResourceLocations("file:/Users/jhs/Desktop/ezenSpring/fileUpload/");
 	}
 
 	@Override

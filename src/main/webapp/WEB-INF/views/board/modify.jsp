@@ -64,13 +64,16 @@
 <!-- 게시글 편집란 시작 -->
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Board information Modify</h4>
-        <form action="/board/modify" method="post">
+        <c:set value="${bdto.bvo }" var="bvo" />
+        <form action="/board/modify" method="post" enctype="multipart/form-data">
         <input type="hidden" name="bno" value="${bvo.bno }">
         <input type="hidden" name="pageNo" value="${pgvo.pageNo }">
         <input type="hidden" name="qty" value="${pgvo.qty }">
         <input type="hidden" name="type" value="${pgvo.type }">
     	<input type="hidden" name="keyword" value="${pgvo.keyword }">
           <div class="row g-3">
+
+            <c:set value="${bdto.bvo }" var="bvo" />
 
             <div class="col-12">
               <label for="email" class="form-label">Writer</label>
@@ -98,18 +101,58 @@
               <input type="text" class="form-control" name="title"
                id="title" placeholder="Title" value="${bvo.title }" >              
             </div>
-
+			
             <div class="col-12">
               <label for="cont" class="form-label">Content</label>
               <textarea class="form-control" name="content" 
                id="cont" placeholder="Content">${bvo.content }</textarea>              
             </div>
-
-    		<button type="submit" class="btn btn-outline-warning">Submit</button>
+            
+            <c:set value="${bdto.bfList }" var="bfList" />
+			<!-- 새로운 파일 등록 -->
+			
+			 <div class=" col-12 d-grid">
+  				<input class="form-control" type="file" style="display: none;"
+  				 id="files" name="files" multiple>
+  				<button type="button" id="trigger" class="btn btn-outline-primary btn-block">files upload</button>
+			</div>
+			<div class="col-12" id="fileZone">
+			
+			
+			</div>
+			<!-- 기존 파일 목록 -->
+			<div class="col-12">
+              <ul class="list-group list-group-flush">
+				<c:forEach items="${bfList }" var="bfvo">
+				  <li class="list-group-item d-flex justify-content-between align-items-start">
+				    <div class="ms-2 me-auto">
+				    	<c:choose>
+				      	<c:when test="${!empty bfvo.fileName }">
+				     	<img alt="" src="/fileUpload/${bfvo.saveDir }/${bfvo.uuid}_th_${bfvo.fileName}">
+				      	</c:when>
+				      	<c:otherwise>
+				      		no image file.
+				      	</c:otherwise>
+				    	</c:choose>
+				      <div class="fw-bold">${bfvo.fileName }</div>
+				      ${bfvo.regAt}
+				    </div>
+				    <span class="badge bg-secondary rounded-pill">${bfvo.fileSize } Byte
+				    </span>
+				    
+				    <button type="button" class="btn btn-sm btn-outline-danger file-x py-0" data-uuid="${bfvo.uuid }">x</button>
+				  </li>  
+				</c:forEach>
+			  </ul>  
+            </div>
+    		<button type="submit" class="btn btn-outline-warning" id="regBtn">Submit</button>
         </div>
         </form>
       </div>
     </div>
   </main>
 </div>
+<script src="/resources/js/board.modify.js" ></script>
+<script src="/resources/js/board.register.js" ></script>
+
 <jsp:include page="../common/footer.jsp" />

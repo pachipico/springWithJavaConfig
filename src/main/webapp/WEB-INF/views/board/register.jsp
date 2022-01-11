@@ -88,7 +88,7 @@
                id="desc" placeholder="Content"></textarea>              
             </div>
             <div class=" col-12 d-grid">
-  				<input class="form-control" type="file" style=""
+  				<input class="form-control" type="file" style="display: none;"
   				 id="files" name="files" multiple>
   				<button type="button" id="trigger" class="btn btn-outline-primary btn-block">files upload</button>
 			</div>

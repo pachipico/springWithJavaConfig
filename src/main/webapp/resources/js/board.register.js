@@ -2,21 +2,47 @@ document.getElementById("trigger").addEventListener("click", (e) => {
   document.getElementById("files").click();
 });
 
+const regexp = new RegExp(".(exe|sh|bat|js|msi|dll)$");
+const test = new RegExp(".(png|jpg|jpeg|gif|PNG)$");
+const maxSize = 1024 * 1024;
+const fileSizeValidation = (fileName, fileSize) => {
+  if (regexp.test(fileName)) {
+    return 0;
+  } else if (!test.test(fileName)) {
+    return 0;
+  } else {
+    return fileSize > maxSize ? 0 : 1;
+  }
+};
+
 document.addEventListener("change", (e) => {
   if (e.target.id == "files") {
+    document.getElementById("regBtn").disabled = false;
     const fileObject = document.getElementById("files").files;
     console.log(fileObject);
-    let fileZone = document.getElementById("fileZone");
-    fileZone.innerHTML = `<ul>`;
-    Array.from(fileObject).forEach(({ name, size }, i) => {
-      if (parseInt(size / 1024) > 1000) {
-        alert(`${i + 1} 번째 파일 ${name}의 용량이 너무 큽니다. 1mb 이하의 파일을 첨부해주세요.`);
-        document.getElementById("files").value = "";
-        fileZone.innerHTML = "";
-        return;
-      }
-      fileZone.innerHTML += `<li>${name}  ${parseInt(size / 1024)}kb</li>`;
-    });
-    fileZone.innerHTML += `</ul>`;
+    let div = document.getElementById("fileZone");
+    div.innerHTML = "";
+    let ul = `<ol class="list-group list-group-flush">`;
+    let isOk = 1;
+    for (const file of fileObject) {
+      let validResult = fileSizeValidation(file.name, file.size);
+      isOk *= validResult;
+      ul += `
+      <li class="list-group-item d-flex justify-content-between align-items-start">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">${validResult ? "👌" : "❌"}</div>
+          ${file.name}
+        </div>
+        <span class="badge bg-${validResult ? "success" : "danger"}" rounded-pill">${parseInt(
+        file.size / 1024
+      )}kb</span>
+      </li>
+    `;
+    }
+    if (!isOk) {
+      document.getElementById("regBtn").disabled = true;
+    }
+    ul += `</ol>`;
+    div.innerHTML = ul;
   }
 });

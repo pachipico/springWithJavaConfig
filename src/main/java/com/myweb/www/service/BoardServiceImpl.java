@@ -52,14 +52,14 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO getDetail(Long bno) {
+	public BoardDTO getDetail(Long bno) {
+		
 		BoardVO bvo = bdao.selectOneBoard(bno);
 		
-		bfdao.selectListBFile(bno);
 		if(bvo != null) {
 			bdao.updateReadCntBoard(bno);
 		}
-		return bdao.selectOneBoard(bno);
+		return new BoardDTO(bdao.selectOneBoard(bno), bfdao.selectListBFile(bno));
 	}
 
 	@Override
@@ -69,15 +69,29 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int modify(BoardVO bvo) {
-		
-		return bdao.updateBoard(bvo);
+	public int modify(BoardDTO bdto) {
+		int isUp = bdao.updateBoard(bdto.getBvo());
+		if(isUp > 0 && bdto.getBfList().size() > 0) {
+			Long bno = bdto.getBvo().getBno();
+
+			for(BFileVO bfvo: bdto.getBfList()) {
+				bfvo.setBno(bno);
+				isUp *= bfdao.insertBFile(bfvo);
+			}
+		}
+		return isUp;
 	}
 
 	@Override
 	public int remove(Long bno) {
 
 		return bdao.deleteBoard(bno);
+	}
+
+	@Override
+	public int removeFile(String uuid) {
+		
+		return bfdao.deleteBFile(uuid);
 	}
 
 

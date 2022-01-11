@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <jsp:include page="../common/header.jsp" />
 <jsp:include page="../common/nav.jsp" />
 
@@ -66,6 +67,8 @@
         <h4 class="mb-3">Board information</h4>
           <div class="row g-3">
 
+			<c:set value="${bdto.bvo }" var="bvo" />
+
             <div class="col-12">
               <label for="email" class="form-label">Writer</label>
               <div class="input-group has-validation">
@@ -92,13 +95,37 @@
               <input type="text" class="form-control" name="title"
                id="title" placeholder="Title" value="${bvo.title }" readOnly>              
             </div>
-
+			
             <div class="col-12">
               <label for="cont" class="form-label">Content</label>
               <textarea class="form-control" name="content" readOnly
                id="cont" placeholder="Content">${bvo.content }</textarea>              
             </div>
-           
+            
+            <c:set value="${bdto.bfList }" var="bfList" />
+			
+			<div class="col-12">
+              <ul class="list-group list-group-flush">
+				<c:forEach items="${bfList }" var="bfvo">
+				  <li class="list-group-item d-flex justify-content-between align-items-start">
+				    <div class="ms-2 me-auto">
+				    	<c:choose>
+				      	<c:when test="${!empty bfvo.fileName }">
+				     	<img alt="" src="/fileUpload/${bfvo.saveDir }/${bfvo.uuid}_th_${bfvo.fileName}">
+				      	</c:when>
+				      	<c:otherwise>
+				      		no image file.
+				      	</c:otherwise>
+				    	</c:choose>
+				      <div class="fw-bold">${bfvo.fileName }</div>
+				      ${bfvo.regAt}
+				    </div>
+				    <span class="badge bg-secondary rounded-pill">${bfvo.fileSize }</span>
+				  </li>  
+				</c:forEach>
+			  </ul>  
+            </div>
+				
             
 			<div class="col-4">
 			<a href="/board/list?pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" class="btn btn-primary">LIST</a>
