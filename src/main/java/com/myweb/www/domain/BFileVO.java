@@ -15,6 +15,7 @@ public class BFileVO {
 	private String fileName;
 	private int fileType;
 	private Long bno;
+	private Long pno;
 	private Long fileSize;
 	private String regAt;
 }

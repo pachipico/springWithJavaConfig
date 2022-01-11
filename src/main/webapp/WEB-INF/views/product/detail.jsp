@@ -19,14 +19,14 @@
 
 		<div class="row g-5">
 			<div class="col-md-5 col-lg-4 order-md-last"></div>
-
+			<c:set value="${bdto.pvo }" var="pvo" />
 			<!-- 상품상세정보란 시작 -->
 			<div class="col-md-7 col-lg-8">
 				<h4 class="mb-3">Board information</h4>
 				<form action="/board/remove" method="post">
-					<input type="text" name="pno" value="${pvo.pno }"> <input
-						type="text" name="type" value="${pgvo.type }"> <input
-						type="text" name="keyword" value="${pgvo.keyword }">
+					<input type="hidden" name="pno" value="${pvo.pno }"> <input
+						type="hidden" name="type" value="${pgvo.type }"> <input
+						type="hidden" name="keyword" value="${pgvo.keyword }">
 					<div class="row g-3">
 
 						<div class="col-12">
@@ -81,7 +81,29 @@
 							<label for="desc" class="form-label">Description</label>
 							<textarea id="desc" class="form-control" name="desc" readOnly>${pvo.description }</textarea>
 						</div>
-
+						<c:set value="${bdto.bfList }" var="bfList" />
+			
+							<div class="col-12">
+				              <ul class="list-group list-group-flush">
+								<c:forEach items="${bfList }" var="bfvo">
+								  <li class="list-group-item d-flex justify-content-between align-items-start">
+								    <div class="ms-2 me-auto">
+								    	<c:choose>
+								      	<c:when test="${!empty bfvo.fileName }">
+								     	<img alt="" src="/pfileUpload/${bfvo.saveDir }/${bfvo.uuid}_th_${bfvo.fileName}">
+								      	</c:when>
+								      	<c:otherwise>
+								      		no image file.
+								      	</c:otherwise>
+								    	</c:choose>
+								      <div class="fw-bold">${bfvo.fileName }</div>
+								      ${bfvo.regAt}
+								    </div>
+								    <span class="badge bg-secondary rounded-pill">${bfvo.fileSize }</span>
+								  </li>  
+								</c:forEach>
+							  </ul>  
+				            </div>
 						<div class="col-4">
 							<a
 								href="/product/list?pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}"

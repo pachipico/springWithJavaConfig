@@ -21,13 +21,14 @@
 <!-- 게시글 수정란 시작 -->
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Board information modify</h4>
-        <form action="/product/modify" method="post">
-        <input type="text" name="pno" value="${pvo.pno }">
-        <input type="text" name="pageNo" value="${pgvo.pageNo }">
-        <input type="text" name="type" value="${pgvo.type }">
-        <input type="text" name="keyword" value="${pgvo.keyword }">
+						<c:set value="${bdto.pvo }" var="pvo" />
+        <form action="/product/modify" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="pno" value="${pvo.pno }">
+        <input type="hidden" name="pageNo" value="${pgvo.pageNo }">
+        <input type="hidden" name="type" value="${pgvo.type }">
+        <input type="hidden" name="keyword" value="${pgvo.keyword }">
         
-        <input type="text" name="qty" value="${pgvo.qty }">
+        <input type="hidden" name="qty" value="${pgvo.qty }">
           <div class="row g-3">
 
            <div class="col-12">
@@ -38,7 +39,6 @@
 									value="${pvo.writer }" readonly>
 							</div>
 						</div>
-
 						<div class="col-12">
 							<label for="regAt" class="form-label">Reg At</label> <input
 								type="text" class="form-control" id="regAt"
@@ -83,7 +83,45 @@
 							<textarea id="description" class="form-control" name="description"  >${pvo.description }</textarea>
 						</div>
 
-    		<button type="submit" id="modBtn" class="btn btn-outline-primary">edit</button>
+
+ 			<c:set value="${bdto.bfList }" var="bfList" />
+			<!-- 새로운 파일 등록 -->
+			
+			 <div class=" col-12 d-grid">
+  				<input class="form-control" type="file" style="display: none;"
+  				 id="files" name="files" multiple>
+  				<button type="button" id="trigger" class="btn btn-outline-primary btn-block">files upload</button>
+			</div>
+			<div class="col-12" id="fileZone">
+			
+			
+			</div>
+			<!-- 기존 파일 목록 -->
+			<div class="col-12">
+              <ul class="list-group list-group-flush">
+				<c:forEach items="${bfList }" var="bfvo">
+				  <li class="list-group-item d-flex justify-content-between align-items-start">
+				    <div class="ms-2 me-auto">
+				    	<c:choose>
+				      	<c:when test="${!empty bfvo.fileName }">
+				     	<img alt="" src="/pfileUpload/${bfvo.saveDir }/${bfvo.uuid}_th_${bfvo.fileName}">
+				      	</c:when>
+				      	<c:otherwise>
+				      		no image file.
+				      	</c:otherwise>
+				    	</c:choose>
+				      <div class="fw-bold">${bfvo.fileName }</div>
+				      ${bfvo.regAt}
+				    </div>
+				    <span class="badge bg-secondary rounded-pill">${bfvo.fileSize } Byte
+				    </span>
+				    
+				    <button type="button" class="btn btn-sm btn-outline-danger file-x py-0" data-uuid="${bfvo.uuid }">x</button>
+				  </li>  
+				</c:forEach>
+			  </ul>  
+            </div>
+    		<button type="submit" id="regBtn" class="btn btn-outline-primary">edit</button>
         </div>
         </form>
       </div>
@@ -103,39 +141,14 @@
     		  <span class="badge bg-primary rounded-pill">modAt</span>
   			</li>
   		</ul>
-  		<!-- The Modal -->
-		<div class="modal" id="myModal">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
-		
-		      <!-- Modal Header -->
-		      <div class="modal-header">
-		        <h4 class="modal-title">${ses.email }</h4>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-		      </div>
-		
-		      <!-- Modal body -->
-		      <div class="modal-body">
-		      	 <div class="input-group">
-		      	 	 
-			 		 <input type="text" class="form-control" id="cmtModText">
-					 <button class="btn btn-outline-primary" id="cmtModBtn" type="button">Modify Comment</button>
-				</div>
-		      </div>
-		
-		      <!-- Modal footer -->
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-danger" id="modalClose" data-bs-dismiss="modal">Close</button>
-		      </div>
-		
-		    </div>
-		  </div>
-		</div>
+  		
  
       
     </div>
   </main>
 </div>
+<script src="/resources/js/product.modify.js"></script>
+<script src="/resources/js/product.register.js"></script>
 
 
 <jsp:include page="../common/footer.jsp" />

@@ -13,8 +13,8 @@ const getCommentList = (pno, page = 1) => {
   getCommentFromServer(pno, page).then((result) => {
     console.log(result);
 
+    let ul = document.getElementById("cmtListArea");
     if (result.list.length > 0) {
-      let ul = document.getElementById("cmtListArea");
       ul.innerHTML = "";
       document.getElementById("cmtCnt").innerText = result.totalCount;
       result.list.forEach((cvo, i) => {
@@ -32,9 +32,8 @@ const getCommentList = (pno, page = 1) => {
       });
       printPagination(result);
     } else {
-      const ul = document.getElementById("cmtListArea");
       let li = `<li class="list-group-item">Comment List Empty</li>`;
-      ul.innerHTML += li;
+      ul.innerHTML = li;
     }
   });
 };

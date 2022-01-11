@@ -53,7 +53,7 @@
           </li>
         </ul>
 
-        <form class="card p-2">
+        <form class="card p-2" method="POST" enctype="multipart/form-data">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Promo code">
             <button type="submit" class="btn btn-secondary">Redeem</button>
@@ -64,13 +64,13 @@
 <!-- 상품등록란 시작 -->
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3">Input product information</h4>
-        <form action="/board/register" method="post">
+        <form action="/product/register" method="post" enctype="multipart/form-data">
           <div class="row g-3">
           
           	<div class="col-12">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" name="title"
-               id="title" placeholder="title">              
+              <label for="pname" class="form-label">Pname</label>
+              <input type="text" class="form-control" name="pname"
+               id="pname" placeholder="pname">              
             </div>
 
             <div class="col-12">
@@ -81,19 +81,45 @@
                 id="writer"  placeholder="writer">              
               </div>
             </div>
-
+            
             <div class="col-12">
-              <label for="content" class="form-label">Content</label>
-              <textarea class="form-control" name="content"
-               id="content" placeholder="Content"></textarea>              
+              <label for="madeBy" class="form-label">Made By</label>
+              <input type="text" class="form-control" name="madeBy"
+               id="madeBy" placeholder="Made By">              
             </div>
+            
+             <div class="col-12">
+              <label for="price" class="form-label">Price</label>
+              <input type="number" class="form-control" name="price"
+               id="price" placeholder="Price">              
+            </div>
+			
+			 <div class="col-12">
+              <label for="category" class="form-label">Category</label>
+              <input type="text" class="form-control" name="category"
+               id="category" placeholder="Category">              
+            </div>
+			
+            <div class="col-12">
+              <label for="discription" class="form-label">Description</label>
+              <textarea class="form-control" name="description"
+               id="description" placeholder="Description"></textarea>              
+            </div>
+             <div class=" col-12 d-grid">
+  				<input class="form-control" type="file" style=""
+  				 id="files" name="files" multiple>
+  				<button type="button" id="trigger" class="btn btn-outline-primary btn-block">files upload</button>
+			</div>
+			<div class="col-12" id="fileZone">
+			
+			</div>
 
-          <button class="w-100 btn btn-primary btn-lg my-5" type="submit">Continue to Register</button>
+          <button class="w-100 btn btn-primary btn-lg my-5" id="regBtn" type="submit">Continue to Register</button>
         </div>
         </form>
       </div>
     </div>
   </main>
 </div>
-
+<script src="/resources/js/product.register.js"></script>
 <jsp:include page="../common/footer.jsp" />

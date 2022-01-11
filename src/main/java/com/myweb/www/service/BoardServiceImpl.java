@@ -53,13 +53,15 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardDTO getDetail(Long bno) {
-		
+		BoardDTO bdto = new BoardDTO();
 		BoardVO bvo = bdao.selectOneBoard(bno);
 		
 		if(bvo != null) {
 			bdao.updateReadCntBoard(bno);
 		}
-		return new BoardDTO(bdao.selectOneBoard(bno), bfdao.selectListBFile(bno));
+		bdto.setBvo(bdao.selectOneBoard(bno));
+		bdto.setBfList(bfdao.selectListBFile(bno));
+		return bdto;
 	}
 
 	@Override

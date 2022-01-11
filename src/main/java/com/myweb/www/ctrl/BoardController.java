@@ -26,7 +26,6 @@ import com.myweb.www.domain.BoardVO;
 import com.myweb.www.domain.PagingVO;
 import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
-import com.myweb.www.service.BFileService;
 import com.myweb.www.service.BoardService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -49,16 +48,17 @@ public class BoardController {
 	@PostMapping("/register")
 	public String register(BoardVO bvo, RedirectAttributes reAttr,
 			@RequestParam(name = "files", required = false) MultipartFile[] files) {
-
+		BoardDTO bdto = new BoardDTO();
 		List<BFileVO> bfList = new ArrayList<BFileVO>();
 
 		if (files[0].getSize() > 0) {
-			bfList = fhd.uploadFiles(files);
+			bfList = fhd.uploadFiles(files, "board");
 
 		}
-
+		bdto.setBvo(bvo);
+		bdto.setBfList(bfList);
 		log.debug("board register bvo : {}", bvo);
-		reAttr.addFlashAttribute("isReg", bsv.register(new BoardDTO(bvo, bfList)) > 0 ? "1" : "0");
+		reAttr.addFlashAttribute("isReg", bsv.register(bdto) > 0 ? "1" : "0");
 		return "redirect:/board/list";
 	}
 
@@ -87,11 +87,13 @@ public class BoardController {
 	public String modify(BoardVO bvo, RedirectAttributes reAttr, @ModelAttribute("pgvo") PagingVO pgvo,
 			@RequestParam(name = "files", required = false) MultipartFile[] files) {
 		List<BFileVO> bfList = new ArrayList<BFileVO>();
-		
+		BoardDTO bdto = new BoardDTO();
 		if (files[0].getSize() > 0) {
-			bfList = fhd.uploadFiles(files);
+			bfList = fhd.uploadFiles(files, "board");
 		}
-		reAttr.addFlashAttribute("isUp", bsv.modify(new BoardDTO(bvo, bfList)));
+		bdto.setBvo(bvo);
+		bdto.setBfList(bfList);
+		reAttr.addFlashAttribute("isUp", bsv.modify(bdto));
 		reAttr.addFlashAttribute("pgvo", pgvo);
 		return "redirect:/board/detail?bno=" + bvo.getBno();
 	}

@@ -11,6 +11,7 @@ public interface ProductDAO {
 	ProductVO selectOneProduct(Long pno);
 	int selectProductCount(PagingVO pgvo);
 	List<ProductVO> selectProductList(PagingVO pgvo);
+	Long selectOnePno();
 	int updateProduct(ProductVO pvo);
 	int updateQtyUp(Long pno);
 	int updateQtyDown(Long pno);

@@ -43,6 +43,10 @@
 		resultType="pvo">
 		select * from product where pno = #{pno}
 	</select>
+	
+	<select id="selectOnePno" resultType="long">
+		select max(pno) from product
+	</select>
 
 	<select id="selectProductCount" parameterType="pgvo"
 		resultType="int">

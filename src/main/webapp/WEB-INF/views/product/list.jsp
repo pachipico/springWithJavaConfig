@@ -7,7 +7,7 @@
 <div class="row">
 	<div class="col-sm-12 col-md-6">
 		<h2>Product List
-			<a href="/board/register" class="btn btn-outline-primary">REG</a>
+			<a href="/product/register" class="btn btn-outline-primary">REG</a>
 		</h2>
 	</div>
 	<div class="col-sm-12 col-md-6">

@@ -24,8 +24,8 @@ public class FileHandler {
 
 	private final String UP_DIR = "/Users/jhs/Desktop/ezenSpring/fileUpload";
 
-	public List<BFileVO> uploadFiles(MultipartFile[] files) {
-
+	public List<BFileVO> uploadFiles(MultipartFile[] files, String vo) {
+		String UP_DIR = vo.equals("board") ? "/Users/jhs/Desktop/ezenSpring/fileUpload" : "/Users/jhs/Desktop/ezenSpring/pfileUpload";
 		LocalDate date = LocalDate.now();
 		String today = date.toString();
 		today = today.replace("-", File.separator);

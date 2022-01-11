@@ -33,3 +33,13 @@ create table b_file(
 	file_size bigint,
 	reg_at datetime default (now())
 );
+
+create table file(
+	uuid varchar(256) primary key,
+	save_dir varchar(256) not null,
+	file_name varchar(512) not null,
+	file_type tinyint(1) default 0,
+	pno bigint(11),
+	file_size bigint,
+	reg_at datetime default (now())
+);
