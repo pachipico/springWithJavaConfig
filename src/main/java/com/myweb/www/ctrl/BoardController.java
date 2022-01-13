@@ -53,7 +53,7 @@ public class BoardController {
 
 		if (files[0].getSize() > 0) {
 			bfList = fhd.uploadFiles(files, "board");
-
+			bvo.setHasFile(bfList.size());
 		}
 		bdto.setBvo(bvo);
 		bdto.setBfList(bfList);
@@ -90,7 +90,7 @@ public class BoardController {
 		BoardDTO bdto = new BoardDTO();
 		if (files[0].getSize() > 0) {
 			bfList = fhd.uploadFiles(files, "board");
-		}
+		} 
 		bdto.setBvo(bvo);
 		bdto.setBfList(bfList);
 		reAttr.addFlashAttribute("isUp", bsv.modify(bdto));
@@ -107,7 +107,7 @@ public class BoardController {
 
 	@DeleteMapping(value = "/file/{uuid}", produces = { MediaType.TEXT_PLAIN_VALUE })
 	public ResponseEntity<String> removeFile(@PathVariable("uuid") String uuid) {
-
+		
 		return bsv.removeFile(uuid) > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}

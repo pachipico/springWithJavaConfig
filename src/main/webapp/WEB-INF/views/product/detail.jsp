@@ -22,8 +22,7 @@
 			<c:set value="${bdto.pvo }" var="pvo" />
 			<!-- 상품상세정보란 시작 -->
 			<div class="col-md-7 col-lg-8">
-				<h4 class="mb-3">Board information</h4>
-				<form action="/board/remove" method="post">
+				<h4 class="mb-3">Product information</h4>
 					<input type="hidden" name="pno" value="${pvo.pno }"> <input
 						type="hidden" name="type" value="${pgvo.type }"> <input
 						type="hidden" name="keyword" value="${pgvo.keyword }">
@@ -118,7 +117,6 @@
 							<button type="submit" id="delBtn" class="btn btn-outline-danger">DEL</button>
 						</div>
 					</div>
-				</form>
 			</div>
 		
 		
@@ -128,11 +126,14 @@
 	</main>
 </div>
 <form action="/product/remove" method="post" id="delForm">
-	<input type="hidden" name="pno" value="${pvo.pno }"> <input
+	<input type="hidden" name="pno" value="${pvo.pno }"> 
+    <input type="hidden" name="qty" value="${pgvo.qty }">
+	<input
 		type="hidden" name="pageNo" value="${pgvo.pageNo }"> <input
 		type="hidden" name="type" value="${pgvo.type }"> <input
 		type="hidden" name="keyword" value="${pgvo.keyword }">
 </form>
+
 <!-- 댓글영역 시작 -->
 <div class="container">
 <div class="input-group my-3">
@@ -172,7 +173,8 @@
   </ul>
 </div>
 
-<!-- The Modal -->
+
+</div>
 <div class="modal" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -198,8 +200,7 @@
 
     </div>
   </div>
-</div>
-</div>
+  </div>
 <script type="text/javascript">
 	const pnoVal = document.querySelector("input[name=pno]").value;
 	const ses = '<c:out value="${ses.email}"/>'

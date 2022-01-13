@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="../common/header.jsp" />
 <jsp:include page="../common/nav.jsp" />
 
@@ -130,12 +131,17 @@
 			<div class="col-4">
 			<a href="/board/list?pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" class="btn btn-primary">LIST</a>
 			</div>
+			<sec:authorize access="isAuthenticated()" >
+	         <sec:authentication property="principal.mvo.email" var="authEmail" />
+	         <c:if test="${bvo.writer == authEmail }">
 			<div class="col-4">
 			<a href="/board/modify?bno=${bvo.bno }&pageNo=${pgvo.pageNo }&qty=${pgvo.qty}&type=${pgvo.type}&keyword=${pgvo.keyword}" id="modBtn" class="btn btn-outline-warning">MOD</a>
 			</div>
 			<div class="col-4">
     		<button type="button" id="delBtn" class="btn btn-outline-danger">DEL</button>
 			</div>
+	         </c:if>
+			</sec:authorize>
     	   	
         </div>
       </div>

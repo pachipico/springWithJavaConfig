@@ -45,13 +45,20 @@
       <th scope="col">Read Count</th>
       <th scope="col">Qty</th>
       <th scope="col">Mod At</th>
+      
     </tr>
   </thead>
   <tbody>
   	<c:forEach items="${list }" var="pvo">
     <tr>
       <th scope="row">${pvo.pno }</th>
-      <td><a href="/product/detail?pno=${pvo.pno }&pageNo=${pgn.pgvo.pageNo}&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">${pvo.pname }</a></td>
+      <td><a href="/product/detail?pno=${pvo.pno }&pageNo=${pgn.pgvo.pageNo}&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">${pvo.pname } ${pvo.hasFile>0 ? '[첨부]' : '' }
+      <c:if test="${pvo.cmtQty > 0 }">
+      <span class="badge rounded-pill bg-info">
+    		${pvo.cmtQty  }
+    		</span></a></td>
+      </c:if>
+      </a></td>
       <td>${pvo.price }</td>
       <td>${pvo.madeBy }</td>
       <td>${pvo.writer }</td>

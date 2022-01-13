@@ -10,4 +10,7 @@ public interface BFileDAO {
 	List<BFileVO> selectListBFile(Long bno);
 	int deleteBFile (String uuid);
 	int deleteAllBFile(Long bno);
+	Long selectOneBno(String uuid);
+	int selectOneFileCount(Long bno);
+	List<BFileVO> selectListAllBFiles();
 }

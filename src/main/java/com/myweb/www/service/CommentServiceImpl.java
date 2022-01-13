@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myweb.www.domain.CommentVO;
 import com.myweb.www.domain.PagingVO;
@@ -17,19 +18,25 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
 public class CommentServiceImpl implements CommentService {
-	
+
 	@Inject
 	CommentDAO cdao;
 	@Inject
 	ProductDAO pdao;
-	
-	
+
+	@Transactional
 	@Override
 	public int registerComment(CommentVO cvo) {
-		if(cvo != null) {
-			pdao.updateQtyUp(cvo.getPno());
+		int isUp = 0;
+		if (cvo != null) {
+			isUp = cdao.insertComment(cvo);
+			Long pno = cvo.getPno();
+			if (isUp > 0) {
+				int cnt = cdao.selectCntComment(pno);
+				pdao.updateProductCommentCount(pno, cnt);
+			}
 		}
-		return cdao.insertComment(cvo);
+		return isUp;
 	}
 
 	@Override
@@ -52,15 +59,20 @@ public class CommentServiceImpl implements CommentService {
 		return cdao.updateComment(cvo);
 	}
 
+	@Transactional
 	@Override
 	public int deleteOne(Long cno, Long pno) {
-		pdao.updateQtyDown(pno);
-		return cdao.deleteComment(cno);
+		int isDel = cdao.deleteComment(cno);
+		if(isDel > 0) {
+			int cnt = cdao.selectCntComment(pno);
+			pdao.updateProductCommentCount(pno, cnt);
+		}
+		return isDel;
 	}
 
 	@Override
 	public int deleteAll(Long pno) {
-
+		
 		return cdao.deleteAllComment(pno);
 	}
 

@@ -9,8 +9,20 @@
 		values(#{uuid}, #{saveDir}, #{fileName}, #{fileType}, #{bno}, #{fileSize})
 	</insert>
 	
+	<select id="selectListAllBFiles" resultType="bfvo">
+		select * from b_file 
+	</select>
+	
 	<select id="selectListBFile" parameterType="long" resultType="bfvo">
 		select * from b_file where bno = #{bno}
+	</select>
+	
+	<select id="selectOneBno" parameterType="string" resultType="long">
+		select bno from b_file where uuid = #{uuid}
+	</select>
+	
+	<select id="selectOneFileCount" parameterType="long" resultType="int">
+		select count(uuid) from b_file where bno = #{bno}
 	</select>
 	
 	<delete id="deleteBFile" parameterType="string">

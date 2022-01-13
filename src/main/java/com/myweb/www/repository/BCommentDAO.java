@@ -20,4 +20,7 @@ public interface BCommentDAO {
 	int deleteOneBComment(long cno);
 
 	int deleteAllBComment(long bno);
+
+	long selectOneBno(long cno);
+
 }

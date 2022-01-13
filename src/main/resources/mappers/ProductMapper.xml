@@ -76,22 +76,18 @@
 		where pno = #{pno}
 	</update>
 
-	<update id="updateQtyUp" parameterType="long">
-		update product set
-		cmt_qty = cmt_qty + 1
-		where pno = #{pno}
+	<update id="updateProductCommentCount">
+		update product set cmt_qty = #{cnt} where pno = #{pno}
 	</update>
 
-	<update id="updateQtyDown" parameterType="long">
+	<update id="updateReadCount" >
 		update product set
-		cmt_qty = cmt_qty - 1
+		read_count = read_count + #{cnt}
 		where pno = #{pno}
 	</update>
-
-	<update id="updateReadCount" parameterType="long">
-		update product set
-		read_count = read_count + 1
-		where pno = #{pno}
+	
+	<update id="updateProductFileCount">
+		update product set has_file = #{cnt} where pno = #{pno}
 	</update>
 
 	<delete id="deleteProduct" parameterType="long">

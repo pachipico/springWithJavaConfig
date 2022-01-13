@@ -1,13 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="../common/header.jsp" />
 <jsp:include page="../common/nav.jsp" />
 <div class="container my-3">
 <div class="row">
 	<div class="col-sm-12 col-md-6">
 		<h2>Board List
-			<a href="/board/register" class="btn btn-outline-primary">REG</a>
+		 <sec:authorize access="isAuthenticated()" >
+	         <sec:authentication property="principal.mvo.email" var="authEmail" />
+	         <sec:authentication property="principal.mvo.nickName" var="authNick" />
+	         <sec:authentication property="principal.mvo.authList" var="auths" />
+	         <c:if test="${ auths.stream().anyMatch(authVO -> authVO.auth.equals('ROLE_USER')).get() }">
+				<a href="/board/register" class="btn btn-outline-primary">REG</a>
+			 </c:if>
+		</sec:authorize>
 		</h2>	
 	</div>
 	<div class="col-sm-12 col-md-6">
@@ -55,19 +63,24 @@
   	<c:forEach items="${list }" var="bvo">
     <tr>
       <th scope="row">${bvo.bno }</th>
-      <td><a href="/board/detail?bno=${bvo.bno }&pageNo=${pgn.pgvo.pageNo}&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">${bvo.title }[${bvo.cmtQty}]</a></td>
+      <td><a href="/board/detail?bno=${bvo.bno }&pageNo=${pgn.pgvo.pageNo}&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">${bvo.title }	
+      <c:if test="${bvo.cmtQty > 0 }">
+      <span class="badge rounded-pill bg-info">
+    		${bvo.cmtQty  }
+    		<span class="visually-hidden">unread messages</span></span></a></td>
+      </c:if>
       <td>${bvo.writer }</td>
       <td>${bvo.readCount }</td>
       <%-- <td>${bvo.cmtQty }</td> --%>
       <td>${bvo.modAt }</td>
       
-      <td>${bvo.attached > 0 ? '첨부파일' : ''}</td>
+      <td>${bvo.hasFile > 0 ? '첨부파일' : ''}</td>
     </tr>
     </c:forEach>    
   </tbody>
 </table>
 <ul class="pagination justify-content-center">
-	<c:if test="${pgn.prev }">
+	<c:if test="${pgn.prev == true }">
     <li class="page-item">
       <a href="/board/list?pageNo=${pgn.startPage - 1 }&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}" class="page-link">Prev</a>
     </li>
@@ -78,7 +91,7 @@
       <a class="page-link" href="/board/list?pageNo=${i }&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">${i }</a>
     </li>
     </c:forEach>
-    <c:if test="${pgn.next }">
+    <c:if test="${pgn.next == true }">
     <li class="page-item">
       <a class="page-link" href="/board/list?pageNo=${pgn.endPage + 1 }&qty=${pgn.pgvo.qty}&type=${pgn.pgvo.type}&keyword=${pgn.pgvo.keyword}">Next</a>
     </li>

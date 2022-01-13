@@ -19,6 +19,7 @@ public class ProductVO {
 	private String modAt;
 	private int readCount;
 	private int cmtQty;
+	private int hasFile;
 	
 	
 }

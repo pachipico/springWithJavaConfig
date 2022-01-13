@@ -91,6 +91,15 @@ public class ProductController {
 		return "redirect:/product/detail?pno="+ pvo.getPno();
 	}
 	
+	@PostMapping("/remove")
+	public String remove (@RequestParam("pno") Long pno, @ModelAttribute("pgvo") PagingVO pgvo, RedirectAttributes reAttr) {
+		
+		reAttr.addFlashAttribute("isDel", psv.remove(pno));
+		reAttr.addFlashAttribute("pgvo", pgvo);
+		return "redirect:/product/list";
+	}
+	
+	
 	@DeleteMapping("/file/{uuid}")
 	public ResponseEntity<String> remove(@PathVariable("uuid") String uuid){
 		return psv.removeFile(uuid) > 0 ? new ResponseEntity<String>("1", HttpStatus.OK) : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);

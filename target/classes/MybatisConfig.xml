@@ -13,5 +13,7 @@
 		<typeAlias type="com.myweb.www.domain.CommentVO" alias="cvo"/>
 		<typeAlias type="com.myweb.www.domain.PagingVO" alias="pgvo"/>
 		<typeAlias type="com.myweb.www.domain.BFileVO" alias="bfvo"/>
+		<typeAlias type="com.myweb.www.security.MemberVO" alias="mvo"/>
+		<typeAlias type="com.myweb.www.security.AuthVO" alias="authVO"/>
 	</typeAliases>
 </configuration>
