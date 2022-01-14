@@ -28,18 +28,20 @@ import com.myweb.www.handler.FileHandler;
 import com.myweb.www.handler.PagingHandler;
 import com.myweb.www.service.BoardService;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Controller
+@AllArgsConstructor
 @RequestMapping("/board/*")
 public class BoardController {
 
-	@Inject
-	private BoardService bsv;
+//	@Inject
+	private final BoardService bsv;
 
-	@Inject
-	private FileHandler fhd;
+//	@Inject
+	private final FileHandler fhd;
 
 	@GetMapping("/register")
 	public void register() {

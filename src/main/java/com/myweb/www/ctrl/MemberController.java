@@ -1,6 +1,7 @@
 package com.myweb.www.ctrl;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -38,5 +39,13 @@ public class MemberController {
 		mvo.setPwd(bcpEncoder.encode(mvo.getPwd()));
 		
 		return "redirect:" + (msv.register(mvo) > 0 ? "/member/register" : "/member/register");
+	}
+	
+	@PostMapping("/login")
+	public String login(HttpServletRequest request, RedirectAttributes reAttr) {
+		
+		reAttr.addFlashAttribute("email", request.getAttribute("email"));
+		reAttr.addFlashAttribute("errMsg", request.getAttribute("errMsg"));
+		return "redirect:/member/login";
 	}
 }

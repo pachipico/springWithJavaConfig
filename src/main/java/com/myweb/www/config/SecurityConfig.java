@@ -13,6 +13,7 @@ import org.springframework.security.web.authentication.AuthenticationFailureHand
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import com.myweb.www.security.CustomAuthMemberService;
+import com.myweb.www.security.LoginFailureHandler;
 import com.myweb.www.security.LoginSuccessHandler;
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		
 		http.authorizeRequests()
+		.antMatchers("/member/list").hasRole("ADMIN")
 		.antMatchers("/", "/board/list", "/product/list", 
 				"/resources/**", "/fileUpload/**", "/pfileUpload/**", 
 				"/board/detail", "/product/detail",
@@ -35,8 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.anyRequest().authenticated();
 		
 		http.formLogin().usernameParameter("email").passwordParameter("pwd").loginPage("/member/login")
-		.successHandler(authSuccessHandler());
-//		.failureHandler(authFailureHandler());
+		.successHandler(authSuccessHandler())
+		.failureHandler(authFailureHandler());
 		
 		// 로그아웃도 무조건 POST 로
 		http.logout().logoutUrl("/member/logout")
@@ -50,10 +52,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		return new LoginSuccessHandler();
 	}
 	
-//	@Bean
-//	public AuthenticationFailureHandler authFailureHandler() {
-//		return new LoginFailureHandler();
-//	}
+	@Bean
+	public AuthenticationFailureHandler authFailureHandler() {
+		return new LoginFailureHandler();
+	}
 	
 	@Bean
 	public UserDetailsService customService() {
